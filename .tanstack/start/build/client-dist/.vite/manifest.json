@@ -1,0 +1,30 @@
+{
+  "../../../../~start/default-client-entry.tsx": {
+    "file": "assets/main-DI0XDUJz.js",
+    "name": "main",
+    "src": "../../../../~start/default-client-entry.tsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/routes/hello.tsx?tsr-split=component",
+      "src/routes/index.tsx?tsr-split=component"
+    ]
+  },
+  "src/routes/hello.tsx?tsr-split=component": {
+    "file": "assets/hello-BvkJdLMb.js",
+    "name": "hello",
+    "src": "src/routes/hello.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "../../../../~start/default-client-entry.tsx"
+    ]
+  },
+  "src/routes/index.tsx?tsr-split=component": {
+    "file": "assets/index-DK0loMfi.js",
+    "name": "index",
+    "src": "src/routes/index.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "../../../../~start/default-client-entry.tsx"
+    ]
+  }
+}
