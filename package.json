@@ -10,7 +10,13 @@
     "typecheck": "tsc --noEmit",
     "lint": "bunx @biomejs/biome check .",
     "lint:fix": "bunx @biomejs/biome check . --write",
-    "lint:unsafe": "bunx @biomejs/biome check . --write --unsafe"
+    "lint:unsafe": "bunx @biomejs/biome check . --write --unsafe",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "auth:secret": "bunx better-auth@latest secret",
+    "auth:generate": "bunx better-auth@latest generate"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "latest",
@@ -28,14 +34,17 @@
     "better-auth": "latest",
     "class-variance-authority": "latest",
     "clsx": "latest",
+    "drizzle-orm": "latest",
+    "postgres": "latest",
     "js-cookie": "latest",
     "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
     "tailwind-merge": "latest",
     "tailwindcss": "latest",
+    "tw-animate-css": "latest",
     "vite": "latest",
-    "zod": "^4.0.5"
+    "zod": "latest"
   },
   "devDependencies": {
     "@biomejs/biome": "latest",
@@ -43,8 +52,8 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/js-cookie": "latest",
-    "tw-animate-css": "latest",
     "typescript": "latest",
-    "vite-tsconfig-paths": "latest"
+    "vite-tsconfig-paths": "latest",
+    "drizzle-kit": "latest"
   }
 }

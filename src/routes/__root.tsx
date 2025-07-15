@@ -36,7 +36,11 @@ function RootComponent() {
   );
 }
 
-function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+type RootDocumentProps = {
+  children: ReactNode;
+};
+
+function RootDocument({ children }: Readonly<RootDocumentProps>) {
   return (
     <html lang="en">
       <head>
