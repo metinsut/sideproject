@@ -11,21 +11,73 @@
 import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as HelloRouteImport } from './routes/hello'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
+import { Route as landingRouteRouteImport } from './routes/(landing)/route'
+import { Route as authRouteRouteImport } from './routes/(auth)/route'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as landingIndexRouteImport } from './routes/(landing)/index'
+import { Route as authTermsRouteImport } from './routes/(auth)/terms'
+import { Route as authRegisterRouteImport } from './routes/(auth)/register'
+import { Route as authPrivacyRouteImport } from './routes/(auth)/privacy'
+import { Route as authLoginRouteImport } from './routes/(auth)/login'
+import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
+import { Route as DashboardPageIndexRouteImport } from './routes/dashboard/page/index'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
 
 const rootServerRouteImport = createServerRootRoute()
 
-const HelloRoute = HelloRouteImport.update({
-  id: '/hello',
-  path: '/hello',
+const DashboardRouteRoute = DashboardRouteRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const landingRouteRoute = landingRouteRouteImport.update({
+  id: '/(landing)',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authRouteRoute = authRouteRouteImport.update({
+  id: '/(auth)',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const landingIndexRoute = landingIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => landingRouteRoute,
+} as any)
+const authTermsRoute = authTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authRegisterRoute = authRegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authPrivacyRoute = authPrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authLoginRoute = authLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authForgotPasswordRoute = authForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const DashboardPageIndexRoute = DashboardPageIndexRouteImport.update({
+  id: '/page/',
+  path: '/page/',
+  getParentRoute: () => DashboardRouteRoute,
 } as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
   id: '/api/auth/$',
@@ -34,29 +86,81 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/hello': typeof HelloRoute
+  '/': typeof landingIndexRoute
+  '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/forgot-password': typeof authForgotPasswordRoute
+  '/login': typeof authLoginRoute
+  '/privacy': typeof authPrivacyRoute
+  '/register': typeof authRegisterRoute
+  '/terms': typeof authTermsRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/page': typeof DashboardPageIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/hello': typeof HelloRoute
+  '/': typeof landingIndexRoute
+  '/forgot-password': typeof authForgotPasswordRoute
+  '/login': typeof authLoginRoute
+  '/privacy': typeof authPrivacyRoute
+  '/register': typeof authRegisterRoute
+  '/terms': typeof authTermsRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/page': typeof DashboardPageIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/hello': typeof HelloRoute
+  '/(auth)': typeof authRouteRouteWithChildren
+  '/(landing)': typeof landingRouteRouteWithChildren
+  '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/(auth)/forgot-password': typeof authForgotPasswordRoute
+  '/(auth)/login': typeof authLoginRoute
+  '/(auth)/privacy': typeof authPrivacyRoute
+  '/(auth)/register': typeof authRegisterRoute
+  '/(auth)/terms': typeof authTermsRoute
+  '/(landing)/': typeof landingIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/page/': typeof DashboardPageIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/hello'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/forgot-password'
+    | '/login'
+    | '/privacy'
+    | '/register'
+    | '/terms'
+    | '/dashboard/'
+    | '/dashboard/page'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/hello'
-  id: '__root__' | '/' | '/hello'
+  to:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/privacy'
+    | '/register'
+    | '/terms'
+    | '/dashboard'
+    | '/dashboard/page'
+  id:
+    | '__root__'
+    | '/(auth)'
+    | '/(landing)'
+    | '/dashboard'
+    | '/(auth)/forgot-password'
+    | '/(auth)/login'
+    | '/(auth)/privacy'
+    | '/(auth)/register'
+    | '/(auth)/terms'
+    | '/(landing)/'
+    | '/dashboard/'
+    | '/dashboard/page/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  HelloRoute: typeof HelloRoute
+  authRouteRoute: typeof authRouteRouteWithChildren
+  landingRouteRoute: typeof landingRouteRouteWithChildren
+  DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
 }
 export interface FileServerRoutesByFullPath {
   '/api/auth/$': typeof ApiAuthSplatServerRoute
@@ -82,19 +186,82 @@ export interface RootServerRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/hello': {
-      id: '/hello'
-      path: '/hello'
-      fullPath: '/hello'
-      preLoaderRoute: typeof HelloRouteImport
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/(landing)': {
+      id: '/(landing)'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof landingRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/(auth)': {
+      id: '/(auth)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof authRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/(landing)/': {
+      id: '/(landing)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof landingIndexRouteImport
+      parentRoute: typeof landingRouteRoute
+    }
+    '/(auth)/terms': {
+      id: '/(auth)/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof authTermsRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/register': {
+      id: '/(auth)/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof authRegisterRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/privacy': {
+      id: '/(auth)/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof authPrivacyRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/login': {
+      id: '/(auth)/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof authLoginRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/forgot-password': {
+      id: '/(auth)/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof authForgotPasswordRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/dashboard/page/': {
+      id: '/dashboard/page/'
+      path: '/page'
+      fullPath: '/dashboard/page'
+      preLoaderRoute: typeof DashboardPageIndexRouteImport
+      parentRoute: typeof DashboardRouteRoute
     }
   }
 }
@@ -110,9 +277,56 @@ declare module '@tanstack/react-start/server' {
   }
 }
 
+interface authRouteRouteChildren {
+  authForgotPasswordRoute: typeof authForgotPasswordRoute
+  authLoginRoute: typeof authLoginRoute
+  authPrivacyRoute: typeof authPrivacyRoute
+  authRegisterRoute: typeof authRegisterRoute
+  authTermsRoute: typeof authTermsRoute
+}
+
+const authRouteRouteChildren: authRouteRouteChildren = {
+  authForgotPasswordRoute: authForgotPasswordRoute,
+  authLoginRoute: authLoginRoute,
+  authPrivacyRoute: authPrivacyRoute,
+  authRegisterRoute: authRegisterRoute,
+  authTermsRoute: authTermsRoute,
+}
+
+const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
+  authRouteRouteChildren,
+)
+
+interface landingRouteRouteChildren {
+  landingIndexRoute: typeof landingIndexRoute
+}
+
+const landingRouteRouteChildren: landingRouteRouteChildren = {
+  landingIndexRoute: landingIndexRoute,
+}
+
+const landingRouteRouteWithChildren = landingRouteRoute._addFileChildren(
+  landingRouteRouteChildren,
+)
+
+interface DashboardRouteRouteChildren {
+  DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardPageIndexRoute: typeof DashboardPageIndexRoute
+}
+
+const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
+  DashboardIndexRoute: DashboardIndexRoute,
+  DashboardPageIndexRoute: DashboardPageIndexRoute,
+}
+
+const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
+  DashboardRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  HelloRoute: HelloRoute,
+  authRouteRoute: authRouteRouteWithChildren,
+  landingRouteRoute: landingRouteRouteWithChildren,
+  DashboardRouteRoute: DashboardRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

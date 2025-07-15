@@ -13,21 +13,37 @@
     "lint:unsafe": "bunx @biomejs/biome check . --write --unsafe"
   },
   "dependencies": {
+    "@radix-ui/react-avatar": "latest",
+    "@radix-ui/react-dialog": "latest",
+    "@radix-ui/react-dropdown-menu": "latest",
+    "@radix-ui/react-label": "latest",
+    "@radix-ui/react-separator": "latest",
+    "@radix-ui/react-slot": "latest",
+    "@radix-ui/react-tooltip": "latest",
     "@tailwindcss/vite": "latest",
+    "@tanstack/react-form": "^1.14.1",
     "@tanstack/react-query": "latest",
     "@tanstack/react-router": "latest",
     "@tanstack/react-start": "latest",
     "better-auth": "latest",
+    "class-variance-authority": "latest",
+    "clsx": "latest",
+    "js-cookie": "latest",
+    "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "tailwind-merge": "latest",
     "tailwindcss": "latest",
-    "vite": "latest"
+    "vite": "latest",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "@biomejs/biome": "latest",
     "@types/bun": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@types/js-cookie": "latest",
+    "tw-animate-css": "latest",
     "typescript": "latest",
     "vite-tsconfig-paths": "latest"
   }
