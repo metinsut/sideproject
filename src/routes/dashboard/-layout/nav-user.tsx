@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "@tanstack/react-router";
 import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -18,7 +19,6 @@ import {
 } from "@/components/ui/sidebar";
 import authClient from "@/lib/auth/auth-client";
 import { getUser } from "@/lib/auth/functions/getUser";
-import { useRouter } from "@tanstack/react-router";
 
 export function NavUser() {
   const { isMobile } = useSidebar();
@@ -29,8 +29,12 @@ export function NavUser() {
   });
 
   const handleLogout = () => {
-    authClient.signOut().then(() => {
-      router.navigate({ to: "/" });
+    authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.navigate({ to: "/" });
+        },
+      },
     });
   };
 
