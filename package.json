@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "clear": "rm -rf node_modules && rm -rf dist && rm -rf bun.lock && rm -rf .output && rm -rf .vinxi",
+    "clear": "rm -rf node_modules && rm -rf dist && rm -rf bun.lock && rm -rf .tanstack",
+    "typecheck": "tsc --noEmit",
     "lint": "bunx @biomejs/biome check .",
     "lint:fix": "bunx @biomejs/biome check . --write",
     "lint:unsafe": "bunx @biomejs/biome check . --write --unsafe"
@@ -16,7 +17,7 @@
     "@tanstack/react-query": "latest",
     "@tanstack/react-router": "latest",
     "@tanstack/react-start": "latest",
-    "better-auth": "^1.2.12",
+    "better-auth": "latest",
     "react": "latest",
     "react-dom": "latest",
     "tailwindcss": "latest",
