@@ -16,6 +16,7 @@ export const Route = createRootRouteWithContext<{
     const user = await context.queryClient.fetchQuery({
       queryKey: ["user"],
       queryFn: ({ signal }) => getUser({ signal }),
+      staleTime: Infinity,
     });
     return { user };
   },

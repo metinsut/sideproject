@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "@tanstack/react-router";
+import { useRouteContext, useRouter, useRouterState } from "@tanstack/react-router";
 import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -18,21 +18,17 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import authClient from "@/lib/auth/auth-client";
-import { getUser } from "@/lib/auth/functions/getUser";
 
 export function NavUser() {
   const { isMobile } = useSidebar();
-  const router = useRouter();
-  const { data: user } = useQuery({
-    queryKey: ["user"],
-    queryFn: () => getUser(),
-  });
+  const { navigate } = useRouter();
+  const { user } = useRouteContext({ from: "/dashboard" });
 
   const handleLogout = () => {
     authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          router.navigate({ to: "/" });
+          navigate({ to: "/" });
         },
       },
     });
