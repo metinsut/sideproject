@@ -1,5 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import { useRouteContext, useRouter, useRouterState } from "@tanstack/react-router";
+import { useRouteContext, useRouter } from "@tanstack/react-router";
 import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {

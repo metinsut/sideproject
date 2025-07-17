@@ -17,7 +17,8 @@
     "indentWidth": 2,
     "lineEnding": "lf",
     "lineWidth": 100,
-    "expand": "auto"
+    "expand": "auto",
+    "includes": ["src/**/*.ts", "src/**/*.tsx", "!src/routeTree.gen.ts"]
   },
   "javascript": {
     "jsxRuntime": "reactClassic",
