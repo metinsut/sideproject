@@ -13,9 +13,10 @@ export default function LandingPage() {
     <div className="flex min-h-screen flex-col bg-background">
       <LandingHeader />
       <main className="flex-1">
-        <section className="grid justify-center w-full py-12 md:py-24 lg:py-32 xl:py-48">
+        <section className="grid justify-center w-full py-6 md:py-12 lg:py-16">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
+              <img src="/logo-name.png" alt="Project Flow" className="h-44 w-96 object-cover" />
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
                   Streamline Your Workflow

@@ -11,19 +11,19 @@ export function LandingHeader() {
     return (
       <header className="flex h-16 w-full items-center justify-between bg-background px-4 md:px-6">
         <Link to="/" className="flex items-center gap-2">
-          <Mountain className="h-6 w-6" />
+          <img src="/logo.png" alt="Project Flow" className="size-10" />
           <span className="font-semibold">ProjectFlow</span>
         </Link>
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon">
-              <Menu className="h-6 w-6" />
+              <Menu className="size-6" />
             </Button>
           </SheetTrigger>
           <SheetContent side="right">
             <div className="grid gap-4 p-4">
               <Link to="/" className="flex items-center gap-2">
-                <Mountain className="h-6 w-6" />
+                <img src="/logo.png" alt="Project Flow" className="size-10" />
                 <span className="font-semibold">ProjectFlow</span>
               </Link>
               <div className="grid gap-2">
@@ -44,7 +44,7 @@ export function LandingHeader() {
   return (
     <header className="flex h-16 w-full items-center justify-between bg-background px-4 md:px-6">
       <Link to="/" className="flex items-center gap-2">
-        <Mountain className="h-6 w-6" />
+        <img src="/logo.png" alt="Project Flow" className="size-10" />
         <span className="font-semibold">ProjectFlow</span>
       </Link>
       <div className="flex items-center gap-4">

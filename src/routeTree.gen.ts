@@ -21,7 +21,7 @@ import { Route as authRegisterRouteImport } from './routes/(auth)/register'
 import { Route as authPrivacyRouteImport } from './routes/(auth)/privacy'
 import { Route as authLoginRouteImport } from './routes/(auth)/login'
 import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
-import { Route as DashboardPageIndexRouteImport } from './routes/dashboard/page/index'
+import { Route as DashboardBoardIndexRouteImport } from './routes/dashboard/board/index'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
 
 const rootServerRouteImport = createServerRootRoute()
@@ -74,9 +74,9 @@ const authForgotPasswordRoute = authForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => authRouteRoute,
 } as any)
-const DashboardPageIndexRoute = DashboardPageIndexRouteImport.update({
-  id: '/page/',
-  path: '/page/',
+const DashboardBoardIndexRoute = DashboardBoardIndexRouteImport.update({
+  id: '/board/',
+  path: '/board/',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
@@ -94,7 +94,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof authRegisterRoute
   '/terms': typeof authTermsRoute
   '/dashboard/': typeof DashboardIndexRoute
-  '/dashboard/page': typeof DashboardPageIndexRoute
+  '/dashboard/board': typeof DashboardBoardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof landingIndexRoute
@@ -104,7 +104,7 @@ export interface FileRoutesByTo {
   '/register': typeof authRegisterRoute
   '/terms': typeof authTermsRoute
   '/dashboard': typeof DashboardIndexRoute
-  '/dashboard/page': typeof DashboardPageIndexRoute
+  '/dashboard/board': typeof DashboardBoardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -118,7 +118,7 @@ export interface FileRoutesById {
   '/(auth)/terms': typeof authTermsRoute
   '/(landing)/': typeof landingIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
-  '/dashboard/page/': typeof DashboardPageIndexRoute
+  '/dashboard/board/': typeof DashboardBoardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,7 +131,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/terms'
     | '/dashboard/'
-    | '/dashboard/page'
+    | '/dashboard/board'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -141,7 +141,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/terms'
     | '/dashboard'
-    | '/dashboard/page'
+    | '/dashboard/board'
   id:
     | '__root__'
     | '/(auth)'
@@ -154,7 +154,7 @@ export interface FileRouteTypes {
     | '/(auth)/terms'
     | '/(landing)/'
     | '/dashboard/'
-    | '/dashboard/page/'
+    | '/dashboard/board/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -256,11 +256,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authForgotPasswordRouteImport
       parentRoute: typeof authRouteRoute
     }
-    '/dashboard/page/': {
-      id: '/dashboard/page/'
-      path: '/page'
-      fullPath: '/dashboard/page'
-      preLoaderRoute: typeof DashboardPageIndexRouteImport
+    '/dashboard/board/': {
+      id: '/dashboard/board/'
+      path: '/board'
+      fullPath: '/dashboard/board'
+      preLoaderRoute: typeof DashboardBoardIndexRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
   }
@@ -311,12 +311,12 @@ const landingRouteRouteWithChildren = landingRouteRoute._addFileChildren(
 
 interface DashboardRouteRouteChildren {
   DashboardIndexRoute: typeof DashboardIndexRoute
-  DashboardPageIndexRoute: typeof DashboardPageIndexRoute
+  DashboardBoardIndexRoute: typeof DashboardBoardIndexRoute
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardIndexRoute: DashboardIndexRoute,
-  DashboardPageIndexRoute: DashboardPageIndexRoute,
+  DashboardBoardIndexRoute: DashboardBoardIndexRoute,
 }
 
 const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
