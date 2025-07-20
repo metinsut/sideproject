@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1752595930763,
-      "tag": "0000_huge_karnak",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1752786501893,
-      "tag": "0001_perfect_stryfe",
+      "when": 1752971043414,
+      "tag": "0000_gorgeous_makkari",
       "breakpoints": true
     }
   ]

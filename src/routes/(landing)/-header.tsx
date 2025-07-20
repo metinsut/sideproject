@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, Mountain } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";

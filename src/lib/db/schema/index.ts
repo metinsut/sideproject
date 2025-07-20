@@ -1,2 +1,5 @@
 export * from "./auth.schema";
-// export your other schemas here
+export * from "./project.schema";
+export * from "./task.schema";
+export * from "./task-comment.schema";
+export * from "./task-history.schema";
