@@ -1,5 +1,5 @@
 import { useRouteContext, useRouter } from "@tanstack/react-router";
-import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from "lucide-react";
+import { BadgeCheck, Bell, ChevronsUpDown, Folder, LogOut, Sparkles } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -89,9 +89,9 @@ export function NavUser() {
                 <BadgeCheck />
                 Account
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
+              <DropdownMenuItem onClick={() => navigate({ to: "/dashboard/projects" })}>
+                <Folder />
+                Projects
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Bell />

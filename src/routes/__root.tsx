@@ -74,6 +74,8 @@ export const Route = createRootRouteWithContext<{
   }),
   component: RootComponent,
   notFoundComponent: () => <div>Not Found</div>,
+  pendingComponent: () => <div>Loading...</div>,
+  errorComponent: (error) => <div>{error.error.message}</div>,
 });
 
 function RootComponent() {

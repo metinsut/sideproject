@@ -5,8 +5,8 @@ import { reactStartCookies } from "better-auth/react-start";
 import { db } from "../db";
 
 export const auth = betterAuth({
-  baseURL: process.env.BASE_URL,
-  secret: process.env.AUTH_SECRET,
+  baseURL: import.meta.env.VITE_BASE_URL,
+  secret: import.meta.env.VITE_AUTH_SECRET,
   database: drizzleAdapter(db, {
     provider: "pg",
   }),
@@ -15,8 +15,8 @@ export const auth = betterAuth({
   },
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+      clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID ?? "",
+      clientSecret: import.meta.env.VITE_GOOGLE_CLIENT_SECRET ?? "",
     },
   },
   plugins: [admin(), reactStartCookies()],
