@@ -8,13 +8,13 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getData } from "@/db-queries/projects";
+import { getProjects } from "@/lib/functions/projects/get-projects";
 import { LinkItem } from "./link-item";
 
 export function MenuList() {
   const { data: projects, isLoading } = useQuery({
     queryKey: ["projects"],
-    queryFn: getData,
+    queryFn: getProjects,
   });
   return (
     <SidebarGroup>

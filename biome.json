@@ -1,7 +1,15 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": ["src/**/*.ts", "src/**/*.tsx", "!src/routeTree.gen.ts"]
+    "includes": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "!src/routeTree.gen.ts",
+      "package.json",
+      "drizzle.config.ts",
+      "vite.config.ts",
+      "biome.json"
+    ]
   },
   "linter": {
     "enabled": true,
@@ -18,7 +26,15 @@
     "lineEnding": "lf",
     "lineWidth": 100,
     "expand": "auto",
-    "includes": ["src/**/*.ts", "src/**/*.tsx", "!src/routeTree.gen.ts"]
+    "includes": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "!src/routeTree.gen.ts",
+      "package.json",
+      "drizzle.config.ts",
+      "vite.config.ts",
+      "biome.json"
+    ]
   },
   "javascript": {
     "jsxRuntime": "reactClassic",

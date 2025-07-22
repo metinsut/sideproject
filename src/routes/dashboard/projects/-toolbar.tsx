@@ -1,15 +1,12 @@
-import { Button } from "@/components/ui/button";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Input } from "@/components/ui/input";
+import { CreateProjectForm } from "./-components/create-project-form";
 
 export function Toolbar() {
   return (
@@ -17,20 +14,11 @@ export function Toolbar() {
       <Drawer>
         <DrawerTrigger>Create Project</DrawerTrigger>
         <DrawerContent>
-          <DrawerHeader>
+          <DrawerHeader className="flex! justify-between">
             <DrawerTitle>Create Project</DrawerTitle>
             <DrawerDescription>Create a new project.</DrawerDescription>
           </DrawerHeader>
-          <div className="flex flex-col gap-4">
-            <Input placeholder="Project Name" />
-            <Input placeholder="Project Description" />
-          </div>
-          <DrawerFooter>
-            <Button>Submit</Button>
-            <DrawerClose>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
-          </DrawerFooter>
+          <CreateProjectForm />
         </DrawerContent>
       </Drawer>
     </div>

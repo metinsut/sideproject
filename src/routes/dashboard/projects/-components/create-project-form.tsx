@@ -3,7 +3,6 @@ import { useRouter } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { insertProjectSchema } from "@/lib/db/schema";
 import { createProject } from "@/lib/functions/projects/create-project";
 
 export function CreateProjectForm() {
@@ -21,7 +20,12 @@ export function CreateProjectForm() {
       }
     },
     validators: {
-      onSubmit: insertProjectSchema,
+      onChange: ({ value }) => {
+        if (!value.name) {
+          return "Name is required";
+        }
+        return null;
+      },
     },
   });
 
@@ -32,7 +36,7 @@ export function CreateProjectForm() {
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className="space-y-4"
+      className="space-y-4 p-4"
     >
       <form.Field name="name">
         {(field) => (
