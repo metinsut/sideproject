@@ -5,11 +5,13 @@ import { getProjects } from "@/lib/functions/projects/get-projects";
 import { useColumns } from "./-columns";
 import { Toolbar } from "./-toolbar";
 
-export const Route = createFileRoute("/dashboard/projects/")({
+export const Route = createFileRoute("/dashboard/project-list/")({
   component: RouteComponent,
   loader: async () => {
+    const projects = await getProjects();
     return {
-      projects: await getProjects(),
+      projects,
+      crumb: "Project List",
     };
   },
 });

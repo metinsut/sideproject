@@ -12,18 +12,25 @@ export const Route = createFileRoute("/dashboard")({
     }
   },
   component: Dashboard,
+  loader: async () => {
+    return {
+      crumb: "Dashboard",
+    };
+  },
 });
 
 function Dashboard() {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
+    <div className="[--header-height:calc(--spacing(14))]">
+      <SidebarProvider className="flex flex-col">
         <Header />
-        <div className="px-4 py-2">
-          <Outlet />
+        <div className="flex flex-1">
+          <AppSidebar />
+          <SidebarInset>
+            <div className="flex-1 px-4 py-2">{<Outlet />}</div>
+          </SidebarInset>
         </div>
-      </SidebarInset>
-    </SidebarProvider>
+      </SidebarProvider>
+    </div>
   );
 }

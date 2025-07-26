@@ -24,7 +24,7 @@
     "@radix-ui/react-dropdown-menu": "latest",
     "@radix-ui/react-label": "latest",
     "@radix-ui/react-separator": "latest",
-    "@radix-ui/react-slot": "latest",
+    "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "latest",
     "@tailwindcss/vite": "latest",
     "@tanstack/react-form": "latest",

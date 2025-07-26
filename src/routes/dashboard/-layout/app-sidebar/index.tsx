@@ -15,7 +15,7 @@ type SidebarProps = React.ComponentProps<typeof Sidebar>;
 
 export function AppSidebar(props: SidebarProps) {
   return (
-    <Sidebar variant="inset" {...props}>
+    <Sidebar className="top-(--header-height) h-[calc(100svh-var(--header-height))]!" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>

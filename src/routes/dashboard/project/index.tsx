@@ -6,7 +6,7 @@ export const Route = createFileRoute("/dashboard/project/")({
   component: RouteComponent,
   loader: async () => {
     const projects = await getProjects();
-    return { projects };
+    return { projects, crumb: "All Projects" };
   },
 });
 function RouteComponent() {

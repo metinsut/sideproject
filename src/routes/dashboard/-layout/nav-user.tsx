@@ -89,7 +89,7 @@ export function NavUser() {
                 <BadgeCheck />
                 Account
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate({ to: "/dashboard/projects" })}>
+              <DropdownMenuItem onClick={() => navigate({ to: "/dashboard/project-list" })}>
                 <Folder />
                 Projects
               </DropdownMenuItem>
