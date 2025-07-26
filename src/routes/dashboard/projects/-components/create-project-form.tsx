@@ -3,29 +3,23 @@ import { useRouter } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { createProject } from "@/lib/functions/projects/create-project";
+import { useCreateProject } from "@/queries/projects";
 
 export function CreateProjectForm() {
   const router = useRouter();
+  const { mutateAsync: createProject } = useCreateProject();
+
   const form = useForm({
     defaultValues: {
       name: "",
       description: "",
     },
     onSubmit: async ({ value }) => {
-      const project = await createProject({ data: value });
+      const project = await createProject(value);
       if (project) {
         router.invalidate();
         router.navigate({ to: `/dashboard/project/${project.id}` });
       }
-    },
-    validators: {
-      onChange: ({ value }) => {
-        if (!value.name) {
-          return "Name is required";
-        }
-        return null;
-      },
     },
   });
 
@@ -36,9 +30,14 @@ export function CreateProjectForm() {
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className="space-y-4 p-4"
+      className="grid gap-2 p-4"
     >
-      <form.Field name="name">
+      <form.Field
+        name="name"
+        validators={{
+          onSubmit: ({ value }) => (value.length < 3 ? "At least 3 characters" : undefined),
+        }}
+      >
         {(field) => (
           <div>
             <Label htmlFor={field.name}>Project Name</Label>
@@ -69,13 +68,15 @@ export function CreateProjectForm() {
           </div>
         )}
       </form.Field>
-      <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-        {([canSubmit, isSubmitting]) => (
-          <Button type="submit" className="w-full" disabled={!canSubmit}>
-            {isSubmitting ? "Creating project..." : "Create Project"}
-          </Button>
-        )}
-      </form.Subscribe>
+      <div className="flex justify-end">
+        <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+          {([canSubmit, isSubmitting]) => (
+            <Button type="submit" className="mt-4" disabled={!canSubmit}>
+              {isSubmitting ? "Creating project..." : "Create Project"}
+            </Button>
+          )}
+        </form.Subscribe>
+      </div>
     </form>
   );
 }
