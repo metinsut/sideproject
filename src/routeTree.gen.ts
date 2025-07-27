@@ -11,28 +11,18 @@
 import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as landingRouteRouteImport } from './routes/(landing)/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
-import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as landingIndexRouteImport } from './routes/(landing)/index'
 import { Route as authTermsRouteImport } from './routes/(auth)/terms'
 import { Route as authRegisterRouteImport } from './routes/(auth)/register'
 import { Route as authPrivacyRouteImport } from './routes/(auth)/privacy'
 import { Route as authLoginRouteImport } from './routes/(auth)/login'
 import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
-import { Route as DashboardProjectIndexRouteImport } from './routes/dashboard/project/index'
-import { Route as DashboardProjectListIndexRouteImport } from './routes/dashboard/project-list/index'
-import { Route as DashboardProjectProjectIdIndexRouteImport } from './routes/dashboard/project/$projectId/index'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
 
 const rootServerRouteImport = createServerRootRoute()
 
-const DashboardRouteRoute = DashboardRouteRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const landingRouteRoute = landingRouteRouteImport.update({
   id: '/(landing)',
   getParentRoute: () => rootRouteImport,
@@ -40,11 +30,6 @@ const landingRouteRoute = landingRouteRouteImport.update({
 const authRouteRoute = authRouteRouteImport.update({
   id: '/(auth)',
   getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardIndexRoute = DashboardIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => DashboardRouteRoute,
 } as any)
 const landingIndexRoute = landingIndexRouteImport.update({
   id: '/',
@@ -76,23 +61,6 @@ const authForgotPasswordRoute = authForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => authRouteRoute,
 } as any)
-const DashboardProjectIndexRoute = DashboardProjectIndexRouteImport.update({
-  id: '/project/',
-  path: '/project/',
-  getParentRoute: () => DashboardRouteRoute,
-} as any)
-const DashboardProjectListIndexRoute =
-  DashboardProjectListIndexRouteImport.update({
-    id: '/project-list/',
-    path: '/project-list/',
-    getParentRoute: () => DashboardRouteRoute,
-  } as any)
-const DashboardProjectProjectIdIndexRoute =
-  DashboardProjectProjectIdIndexRouteImport.update({
-    id: '/project/$projectId/',
-    path: '/project/$projectId/',
-    getParentRoute: () => DashboardRouteRoute,
-  } as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -101,16 +69,11 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof landingIndexRoute
-  '/dashboard': typeof DashboardRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
   '/login': typeof authLoginRoute
   '/privacy': typeof authPrivacyRoute
   '/register': typeof authRegisterRoute
   '/terms': typeof authTermsRoute
-  '/dashboard/': typeof DashboardIndexRoute
-  '/dashboard/project-list': typeof DashboardProjectListIndexRoute
-  '/dashboard/project': typeof DashboardProjectIndexRoute
-  '/dashboard/project/$projectId': typeof DashboardProjectProjectIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof landingIndexRoute
@@ -119,74 +82,44 @@ export interface FileRoutesByTo {
   '/privacy': typeof authPrivacyRoute
   '/register': typeof authRegisterRoute
   '/terms': typeof authTermsRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/dashboard/project-list': typeof DashboardProjectListIndexRoute
-  '/dashboard/project': typeof DashboardProjectIndexRoute
-  '/dashboard/project/$projectId': typeof DashboardProjectProjectIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(auth)': typeof authRouteRouteWithChildren
   '/(landing)': typeof landingRouteRouteWithChildren
-  '/dashboard': typeof DashboardRouteRouteWithChildren
   '/(auth)/forgot-password': typeof authForgotPasswordRoute
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/privacy': typeof authPrivacyRoute
   '/(auth)/register': typeof authRegisterRoute
   '/(auth)/terms': typeof authTermsRoute
   '/(landing)/': typeof landingIndexRoute
-  '/dashboard/': typeof DashboardIndexRoute
-  '/dashboard/project-list/': typeof DashboardProjectListIndexRoute
-  '/dashboard/project/': typeof DashboardProjectIndexRoute
-  '/dashboard/project/$projectId/': typeof DashboardProjectProjectIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/dashboard'
     | '/forgot-password'
     | '/login'
     | '/privacy'
     | '/register'
     | '/terms'
-    | '/dashboard/'
-    | '/dashboard/project-list'
-    | '/dashboard/project'
-    | '/dashboard/project/$projectId'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/forgot-password'
-    | '/login'
-    | '/privacy'
-    | '/register'
-    | '/terms'
-    | '/dashboard'
-    | '/dashboard/project-list'
-    | '/dashboard/project'
-    | '/dashboard/project/$projectId'
+  to: '/' | '/forgot-password' | '/login' | '/privacy' | '/register' | '/terms'
   id:
     | '__root__'
     | '/(auth)'
     | '/(landing)'
-    | '/dashboard'
     | '/(auth)/forgot-password'
     | '/(auth)/login'
     | '/(auth)/privacy'
     | '/(auth)/register'
     | '/(auth)/terms'
     | '/(landing)/'
-    | '/dashboard/'
-    | '/dashboard/project-list/'
-    | '/dashboard/project/'
-    | '/dashboard/project/$projectId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   authRouteRoute: typeof authRouteRouteWithChildren
   landingRouteRoute: typeof landingRouteRouteWithChildren
-  DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
 }
 export interface FileServerRoutesByFullPath {
   '/api/auth/$': typeof ApiAuthSplatServerRoute
@@ -212,13 +145,6 @@ export interface RootServerRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/(landing)': {
       id: '/(landing)'
       path: '/'
@@ -232,13 +158,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof authRouteRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/dashboard/': {
-      id: '/dashboard/'
-      path: '/'
-      fullPath: '/dashboard/'
-      preLoaderRoute: typeof DashboardIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
     }
     '/(landing)/': {
       id: '/(landing)/'
@@ -281,27 +200,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/forgot-password'
       preLoaderRoute: typeof authForgotPasswordRouteImport
       parentRoute: typeof authRouteRoute
-    }
-    '/dashboard/project/': {
-      id: '/dashboard/project/'
-      path: '/project'
-      fullPath: '/dashboard/project'
-      preLoaderRoute: typeof DashboardProjectIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
-    }
-    '/dashboard/project-list/': {
-      id: '/dashboard/project-list/'
-      path: '/project-list'
-      fullPath: '/dashboard/project-list'
-      preLoaderRoute: typeof DashboardProjectListIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
-    }
-    '/dashboard/project/$projectId/': {
-      id: '/dashboard/project/$projectId/'
-      path: '/project/$projectId'
-      fullPath: '/dashboard/project/$projectId'
-      preLoaderRoute: typeof DashboardProjectProjectIdIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
     }
   }
 }
@@ -349,28 +247,9 @@ const landingRouteRouteWithChildren = landingRouteRoute._addFileChildren(
   landingRouteRouteChildren,
 )
 
-interface DashboardRouteRouteChildren {
-  DashboardIndexRoute: typeof DashboardIndexRoute
-  DashboardProjectListIndexRoute: typeof DashboardProjectListIndexRoute
-  DashboardProjectIndexRoute: typeof DashboardProjectIndexRoute
-  DashboardProjectProjectIdIndexRoute: typeof DashboardProjectProjectIdIndexRoute
-}
-
-const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
-  DashboardIndexRoute: DashboardIndexRoute,
-  DashboardProjectListIndexRoute: DashboardProjectListIndexRoute,
-  DashboardProjectIndexRoute: DashboardProjectIndexRoute,
-  DashboardProjectProjectIdIndexRoute: DashboardProjectProjectIdIndexRoute,
-}
-
-const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
-  DashboardRouteRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   authRouteRoute: authRouteRouteWithChildren,
   landingRouteRoute: landingRouteRouteWithChildren,
-  DashboardRouteRoute: DashboardRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
