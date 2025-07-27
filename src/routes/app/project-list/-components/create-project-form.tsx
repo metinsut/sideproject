@@ -18,7 +18,7 @@ export function CreateProjectForm() {
       const project = await createProject(value);
       if (project) {
         router.invalidate();
-        router.navigate({ to: `/dashboard/project/${project.id}` });
+        router.navigate({ to: `/app/project/${project.id}` });
       }
     },
   });

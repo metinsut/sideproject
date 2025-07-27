@@ -23,6 +23,7 @@
     "@radix-ui/react-dialog": "latest",
     "@radix-ui/react-dropdown-menu": "latest",
     "@radix-ui/react-label": "latest",
+    "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-separator": "latest",
     "@radix-ui/react-slot": "latest",
     "@radix-ui/react-tooltip": "latest",

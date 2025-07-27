@@ -11,10 +11,10 @@ export const Route = createFileRoute("/app")({
       });
     }
   },
-  component: Dashboard,
+  component: AppLayout,
 });
 
-function Dashboard() {
+function AppLayout() {
   return (
     <div className="[--header-height:calc(--spacing(14))]">
       <SidebarProvider className="flex flex-col">

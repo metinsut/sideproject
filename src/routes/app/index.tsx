@@ -10,5 +10,5 @@ export const Route = createFileRoute("/app/")({
 });
 
 export default function Dashboard() {
-  return <div>Dashboard Home "/dashboard/"</div>;
+  return <div>App Home "/app/"</div>;
 }
