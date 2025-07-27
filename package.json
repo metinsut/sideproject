@@ -24,7 +24,7 @@
     "@radix-ui/react-dropdown-menu": "latest",
     "@radix-ui/react-label": "latest",
     "@radix-ui/react-separator": "latest",
-    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-slot": "latest",
     "@radix-ui/react-tooltip": "latest",
     "@tailwindcss/vite": "latest",
     "@tanstack/react-form": "latest",
@@ -36,7 +36,7 @@
     "better-auth": "latest",
     "class-variance-authority": "latest",
     "clsx": "latest",
-    "dayjs": "^1.11.13",
+    "dayjs": "latest",
     "drizzle-orm": "latest",
     "drizzle-zod": "latest",
     "js-cookie": "latest",
@@ -55,11 +55,11 @@
   "devDependencies": {
     "@biomejs/biome": "latest",
     "@types/bun": "latest",
+    "@types/js-cookie": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@types/js-cookie": "latest",
+    "drizzle-kit": "latest",
     "typescript": "latest",
-    "vite-tsconfig-paths": "latest",
-    "drizzle-kit": "latest"
+    "vite-tsconfig-paths": "latest"
   }
 }

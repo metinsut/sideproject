@@ -9,6 +9,6 @@ export default {
   dialect: "postgresql",
   casing: "snake_case",
   dbCredentials: {
-    url: process.env.DATABASE_URL || "",
+    url: process.env.VITE_DATABASE_URL || "",
   },
 } satisfies Config;

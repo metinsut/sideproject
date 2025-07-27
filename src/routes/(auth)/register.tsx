@@ -23,13 +23,11 @@ function Register() {
       name: "",
     },
     onSubmit: async ({ value }) => {
-      console.log({ value });
-      const { data, error } = await authClient.signUp.email({
+      const { error } = await authClient.signUp.email({
         email: value.email,
         password: value.password,
         name: value.name,
       });
-      console.log({ data, error });
       if (error) {
         toast.error(error.message);
       } else {
@@ -39,11 +37,15 @@ function Register() {
   });
 
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: () =>
-      authClient.signIn.social({
+    mutationFn: async () => {
+      const { error } = await authClient.signIn.social({
         provider: "google",
         callbackURL: "/dashboard",
-      }),
+      });
+      if (error) {
+        toast.error(error.message);
+      }
+    },
     onError: (err: Error) => {
       toast.error(err.message);
     },

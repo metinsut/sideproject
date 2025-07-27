@@ -4,7 +4,10 @@ import { auth } from "../index";
 
 export const getUser = createServerFn({ method: "GET" }).handler(async () => {
   const { headers } = getWebRequest();
-  const session = await auth.api.getSession({ headers });
-
-  return session?.user || null;
+  try {
+    const session = await auth.api.getSession({ headers });
+    return session?.user || null;
+  } catch {
+    return null;
+  }
 });
