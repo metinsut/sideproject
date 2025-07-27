@@ -11,18 +11,28 @@
 import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteRouteImport } from './routes/app/route'
 import { Route as landingRouteRouteImport } from './routes/(landing)/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
+import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as landingIndexRouteImport } from './routes/(landing)/index'
 import { Route as authTermsRouteImport } from './routes/(auth)/terms'
 import { Route as authRegisterRouteImport } from './routes/(auth)/register'
 import { Route as authPrivacyRouteImport } from './routes/(auth)/privacy'
 import { Route as authLoginRouteImport } from './routes/(auth)/login'
 import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
+import { Route as AppProjectIndexRouteImport } from './routes/app/project/index'
+import { Route as AppProjectListIndexRouteImport } from './routes/app/project-list/index'
+import { Route as AppProjectProjectIdIndexRouteImport } from './routes/app/project/$projectId/index'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
 
 const rootServerRouteImport = createServerRootRoute()
 
+const AppRouteRoute = AppRouteRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const landingRouteRoute = landingRouteRouteImport.update({
   id: '/(landing)',
   getParentRoute: () => rootRouteImport,
@@ -30,6 +40,11 @@ const landingRouteRoute = landingRouteRouteImport.update({
 const authRouteRoute = authRouteRouteImport.update({
   id: '/(auth)',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const landingIndexRoute = landingIndexRouteImport.update({
   id: '/',
@@ -61,6 +76,22 @@ const authForgotPasswordRoute = authForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => authRouteRoute,
 } as any)
+const AppProjectIndexRoute = AppProjectIndexRouteImport.update({
+  id: '/project/',
+  path: '/project/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppProjectListIndexRoute = AppProjectListIndexRouteImport.update({
+  id: '/project-list/',
+  path: '/project-list/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppProjectProjectIdIndexRoute =
+  AppProjectProjectIdIndexRouteImport.update({
+    id: '/project/$projectId/',
+    path: '/project/$projectId/',
+    getParentRoute: () => AppRouteRoute,
+  } as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -69,11 +100,16 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof landingIndexRoute
+  '/app': typeof AppRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
   '/login': typeof authLoginRoute
   '/privacy': typeof authPrivacyRoute
   '/register': typeof authRegisterRoute
   '/terms': typeof authTermsRoute
+  '/app/': typeof AppIndexRoute
+  '/app/project-list': typeof AppProjectListIndexRoute
+  '/app/project': typeof AppProjectIndexRoute
+  '/app/project/$projectId': typeof AppProjectProjectIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof landingIndexRoute
@@ -82,44 +118,74 @@ export interface FileRoutesByTo {
   '/privacy': typeof authPrivacyRoute
   '/register': typeof authRegisterRoute
   '/terms': typeof authTermsRoute
+  '/app': typeof AppIndexRoute
+  '/app/project-list': typeof AppProjectListIndexRoute
+  '/app/project': typeof AppProjectIndexRoute
+  '/app/project/$projectId': typeof AppProjectProjectIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(auth)': typeof authRouteRouteWithChildren
   '/(landing)': typeof landingRouteRouteWithChildren
+  '/app': typeof AppRouteRouteWithChildren
   '/(auth)/forgot-password': typeof authForgotPasswordRoute
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/privacy': typeof authPrivacyRoute
   '/(auth)/register': typeof authRegisterRoute
   '/(auth)/terms': typeof authTermsRoute
   '/(landing)/': typeof landingIndexRoute
+  '/app/': typeof AppIndexRoute
+  '/app/project-list/': typeof AppProjectListIndexRoute
+  '/app/project/': typeof AppProjectIndexRoute
+  '/app/project/$projectId/': typeof AppProjectProjectIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
+    | '/app'
+    | '/forgot-password'
+    | '/login'
+    | '/privacy'
+    | '/register'
+    | '/terms'
+    | '/app/'
+    | '/app/project-list'
+    | '/app/project'
+    | '/app/project/$projectId'
+  fileRoutesByTo: FileRoutesByTo
+  to:
     | '/'
     | '/forgot-password'
     | '/login'
     | '/privacy'
     | '/register'
     | '/terms'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/forgot-password' | '/login' | '/privacy' | '/register' | '/terms'
+    | '/app'
+    | '/app/project-list'
+    | '/app/project'
+    | '/app/project/$projectId'
   id:
     | '__root__'
     | '/(auth)'
     | '/(landing)'
+    | '/app'
     | '/(auth)/forgot-password'
     | '/(auth)/login'
     | '/(auth)/privacy'
     | '/(auth)/register'
     | '/(auth)/terms'
     | '/(landing)/'
+    | '/app/'
+    | '/app/project-list/'
+    | '/app/project/'
+    | '/app/project/$projectId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   authRouteRoute: typeof authRouteRouteWithChildren
   landingRouteRoute: typeof landingRouteRouteWithChildren
+  AppRouteRoute: typeof AppRouteRouteWithChildren
 }
 export interface FileServerRoutesByFullPath {
   '/api/auth/$': typeof ApiAuthSplatServerRoute
@@ -145,6 +211,13 @@ export interface RootServerRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(landing)': {
       id: '/(landing)'
       path: '/'
@@ -158,6 +231,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof authRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRouteRoute
     }
     '/(landing)/': {
       id: '/(landing)/'
@@ -200,6 +280,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/forgot-password'
       preLoaderRoute: typeof authForgotPasswordRouteImport
       parentRoute: typeof authRouteRoute
+    }
+    '/app/project/': {
+      id: '/app/project/'
+      path: '/project'
+      fullPath: '/app/project'
+      preLoaderRoute: typeof AppProjectIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/project-list/': {
+      id: '/app/project-list/'
+      path: '/project-list'
+      fullPath: '/app/project-list'
+      preLoaderRoute: typeof AppProjectListIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/project/$projectId/': {
+      id: '/app/project/$projectId/'
+      path: '/project/$projectId'
+      fullPath: '/app/project/$projectId'
+      preLoaderRoute: typeof AppProjectProjectIdIndexRouteImport
+      parentRoute: typeof AppRouteRoute
     }
   }
 }
@@ -247,9 +348,28 @@ const landingRouteRouteWithChildren = landingRouteRoute._addFileChildren(
   landingRouteRouteChildren,
 )
 
+interface AppRouteRouteChildren {
+  AppIndexRoute: typeof AppIndexRoute
+  AppProjectListIndexRoute: typeof AppProjectListIndexRoute
+  AppProjectIndexRoute: typeof AppProjectIndexRoute
+  AppProjectProjectIdIndexRoute: typeof AppProjectProjectIdIndexRoute
+}
+
+const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppIndexRoute: AppIndexRoute,
+  AppProjectListIndexRoute: AppProjectListIndexRoute,
+  AppProjectIndexRoute: AppProjectIndexRoute,
+  AppProjectProjectIdIndexRoute: AppProjectProjectIdIndexRoute,
+}
+
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   authRouteRoute: authRouteRouteWithChildren,
   landingRouteRoute: landingRouteRouteWithChildren,
+  AppRouteRoute: AppRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

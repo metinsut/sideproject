@@ -29,7 +29,7 @@ function Login() {
       if (error) {
         toast.error(error.message);
       } else {
-        router.navigate({ to: "/dashboard" });
+        router.navigate({ to: "/app" });
       }
     },
   });
@@ -38,7 +38,7 @@ function Login() {
     mutationFn: () =>
       authClient.signIn.social({
         provider: "google",
-        callbackURL: "/dashboard",
+        callbackURL: "/app",
       }),
     onError: (err: Error) => {
       toast.error(err.message);

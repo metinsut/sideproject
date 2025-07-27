@@ -40,7 +40,7 @@ function Register() {
     mutationFn: async () => {
       const { error } = await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/dashboard",
+        callbackURL: "/app",
       });
       if (error) {
         toast.error(error.message);
