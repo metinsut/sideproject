@@ -1,16 +1,20 @@
-import { createFileRoute, Link, useLoaderData } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { getProjects } from "@/lib/functions/projects/get-projects";
+import { useGetProjects } from "@/queries/projects";
 
 export const Route = createFileRoute("/app/project/")({
   component: RouteComponent,
-  loader: async () => {
-    const projects = await getProjects();
+  loader: async ({ context }) => {
+    const projects = await context.queryClient.ensureQueryData(useGetProjects());
     return { projects, crumb: "All Projects" };
   },
+  head: () => ({
+    meta: [{ title: "Projects" }],
+  }),
 });
 function RouteComponent() {
-  const { projects } = useLoaderData({ from: "/app/project/" });
+  const { data: projects } = useSuspenseQuery(useGetProjects());
 
   return (
     <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">

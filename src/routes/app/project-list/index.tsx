@@ -1,23 +1,21 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { FTable } from "@/components/f/f-table";
-import { getProjects } from "@/lib/functions/projects/get-projects";
+import { useGetProjects } from "@/queries/projects";
 import { useColumns } from "./-columns";
 import { Toolbar } from "./-toolbar";
 
 export const Route = createFileRoute("/app/project-list/")({
   component: RouteComponent,
-  loader: async () => {
-    const projects = await getProjects();
-    return {
-      projects,
-      crumb: "Project List",
-    };
+  loader: async ({ context }) => {
+    const projects = await context.queryClient.ensureQueryData(useGetProjects());
+    return { projects, crumb: "Project List" };
   },
 });
 
 function RouteComponent() {
-  const { projects } = Route.useLoaderData();
+  const { data: projects } = useSuspenseQuery(useGetProjects());
   const columns = useColumns();
 
   const table = useReactTable({

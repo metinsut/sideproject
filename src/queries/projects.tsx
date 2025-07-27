@@ -1,7 +1,8 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { queryOptions, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import type { CreateProjectSchema } from "@/lib/functions/projects/create-project";
 import { createProject } from "@/lib/functions/projects/create-project";
+import { getProjectById } from "@/lib/functions/projects/get-project-by-id";
 import { getProjects } from "@/lib/functions/projects/get-projects";
 
 export function useCreateProject() {
@@ -53,8 +54,15 @@ export function useCreateProject() {
 }
 
 export function useGetProjects() {
-  return useQuery({
+  return queryOptions({
     queryKey: ["projects"],
     queryFn: () => getProjects(),
+  });
+}
+
+export function useGetProjectById(projectId: number) {
+  return queryOptions({
+    queryKey: ["projects", projectId],
+    queryFn: () => getProjectById({ data: { projectId } }),
   });
 }

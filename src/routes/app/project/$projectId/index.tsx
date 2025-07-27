@@ -1,15 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getProjectById } from "@/lib/functions/projects/get-project-by-id";
+import { useGetProjectById } from "@/queries/projects";
 
 export const Route = createFileRoute("/app/project/$projectId/")({
   component: RouteComponent,
-  loader: async ({ params }) => {
+  loader: async ({ context, params }) => {
     const projectId = Number(params.projectId);
-    const project = await getProjectById({ data: { projectId } });
-    return {
-      project,
-      crumb: project?.name ?? "Project",
-    };
+    const project = await context.queryClient.ensureQueryData(useGetProjectById(projectId));
+    return { project, crumb: project?.name ?? "Project" };
   },
 });
 
