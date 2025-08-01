@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
 import {
   Select,
   SelectContent,
@@ -7,14 +7,41 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useGetProjects } from "@/queries/projects";
+import { setProjectIdFn } from "@/lib/functions/projects/set-project-id";
+import { useGetProjectFirstId, useGetProjects } from "@/queries/projects";
 
 export function ProjectSelect() {
-  const [selectedProjectId, setSelectedProjectId] = useState<string | undefined>();
   const { data: projects } = useSuspenseQuery(useGetProjects());
+  const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  const {
+    data: { projectId },
+  } = useSuspenseQuery(useGetProjectFirstId());
+
+  const handleValueChange = async (projectId: string) => {
+    await setProjectIdFn({ data: { projectId } });
+
+    const pathParts = pathname.split("/");
+    const projectIndex = pathParts.findIndex((part) => part === "project");
+
+    if (projectIndex !== -1 && pathParts.length > projectIndex + 1) {
+      const oldProjectId = pathParts[projectIndex + 1];
+      if (oldProjectId) {
+        const newPath = pathname.replace(oldProjectId, projectId);
+        navigate({ to: newPath, reloadDocument: true });
+      }
+    } else {
+      navigate({
+        to: "/app/project/$projectId",
+        params: { projectId },
+        reloadDocument: true,
+      });
+    }
+  };
 
   return (
-    <Select value={selectedProjectId} onValueChange={setSelectedProjectId}>
+    <Select value={projectId} onValueChange={handleValueChange}>
       <SelectTrigger className="w-full">
         <SelectValue placeholder="Select a project" />
       </SelectTrigger>

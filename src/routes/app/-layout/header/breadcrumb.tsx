@@ -1,5 +1,6 @@
-import { isMatch, Link, useMatches } from "@tanstack/react-router";
+import { Link, useMatches } from "@tanstack/react-router";
 import { Fragment } from "react";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,14 +13,22 @@ import {
 export function BreadCrumb() {
   const matches = useMatches();
 
-  const matchesWithCrumbs = matches.filter((match) => isMatch(match, "loaderData.crumb"));
+  const items = matches
+    .map((match) => {
+      const { loaderData, pathname } = match;
 
-  const items = matchesWithCrumbs.map(({ pathname, loaderData }) => {
-    return {
-      href: pathname,
-      label: loaderData?.crumb,
-    };
-  });
+      const label = loaderData?.crumb;
+
+      if (!label) {
+        return null;
+      }
+
+      return {
+        href: pathname,
+        label,
+      };
+    })
+    .filter(Boolean);
 
   if (items.length === 0) {
     return null;
@@ -29,15 +38,13 @@ export function BreadCrumb() {
     <Breadcrumb className="hidden md:flex">
       <BreadcrumbList>
         {items.map((crumb, index) => (
-          <Fragment key={crumb.href}>
+          <Fragment key={crumb?.href}>
             <BreadcrumbItem>
               {index === items.length - 1 ? (
-                <BreadcrumbPage>{crumb.label}</BreadcrumbPage>
+                <BreadcrumbPage>{crumb?.label}</BreadcrumbPage>
               ) : (
                 <BreadcrumbLink asChild>
-                  <Link to={crumb.href} params={{}} search={{}}>
-                    {crumb.label}
-                  </Link>
+                  <Link to={crumb?.href}>{crumb?.label}</Link>
                 </BreadcrumbLink>
               )}
             </BreadcrumbItem>

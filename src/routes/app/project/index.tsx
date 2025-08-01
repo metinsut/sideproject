@@ -7,12 +7,13 @@ export const Route = createFileRoute("/app/project/")({
   component: RouteComponent,
   loader: async ({ context }) => {
     const projects = await context.queryClient.ensureQueryData(useGetProjects());
-    return { projects, crumb: "All Projects" };
+    return { projects, crumb: "Projects" };
   },
   head: () => ({
     meta: [{ title: "Projects" }],
   }),
 });
+
 function RouteComponent() {
   const { data: projects } = useSuspenseQuery(useGetProjects());
 

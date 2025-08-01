@@ -1,22 +1,35 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useGetProjectFirstId } from "@/queries/projects";
 import { LinkItem } from "./link-item";
 
 export function MenuList() {
+  const {
+    data: { projectId },
+  } = useSuspenseQuery(useGetProjectFirstId());
+
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <LinkItem to="/app/tasks">Task List</LinkItem>
+              <LinkItem to="/app/project/$projectId/tasks" params={{ projectId }}>
+                Tasks
+              </LinkItem>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <LinkItem to="/app/project/$projectId/board" params={{ projectId }}>
+                Board
+              </LinkItem>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
