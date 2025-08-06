@@ -2,12 +2,12 @@
 import type { Row, Table as TableType } from "@tanstack/react-table";
 import { flexRender } from "@tanstack/react-table";
 import {
-  Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
+  Table as TableUI,
 } from "@/components/ui/table";
 
 type Props<T> = {
@@ -16,11 +16,11 @@ type Props<T> = {
   noResult?: React.ReactNode;
 };
 
-export function FTable<T>(props: Props<T>) {
+export function Table<T>(props: Props<T>) {
   const { table, onRowClick, noResult = "No results." } = props;
   return (
     <div className="rounded-md border">
-      <Table>
+      <TableUI>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -59,7 +59,7 @@ export function FTable<T>(props: Props<T>) {
             </TableRow>
           )}
         </TableBody>
-      </Table>
+      </TableUI>
     </div>
   );
 }

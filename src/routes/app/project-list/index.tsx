@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { Suspense } from "react";
-import { FTable } from "@/components/f/f-table";
+import { Table } from "@/components/custom/table";
 import { useGetProjects } from "@/queries/projects";
 import { useColumns } from "./-columns";
 import { Toolbar } from "./-toolbar";
@@ -11,7 +11,8 @@ export const Route = createFileRoute("/app/project-list/")({
   component: RouteComponent,
   loader: async ({ context }) => {
     const projects = await context.queryClient.ensureQueryData(useGetProjects());
-    return { projects, crumb: "Project List" };
+    const crumb = [{ label: "Project List", href: "/app/project-list" }];
+    return { projects, crumb };
   },
 });
 
@@ -29,7 +30,7 @@ function RouteComponent() {
     <Suspense fallback={<div>Loading...</div>}>
       <div className="flex flex-col gap-4">
         <Toolbar />
-        <FTable table={table} />
+        <Table table={table} />
       </div>
     </Suspense>
   );

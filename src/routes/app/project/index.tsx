@@ -1,31 +1,63 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, useLoaderData, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { getProjectIdFn } from "@/lib/functions/projects/get-project-id";
+import { setProjectIdFn } from "@/lib/functions/projects/set-project-id";
+import { cn } from "@/lib/utils";
 import { useGetProjects } from "@/queries/projects";
 
 export const Route = createFileRoute("/app/project/")({
-  component: RouteComponent,
+  component: ProjectList,
   loader: async ({ context }) => {
     const projects = await context.queryClient.ensureQueryData(useGetProjects());
-    return { projects, crumb: "Projects" };
+    const projectId = await getProjectIdFn();
+
+    return { projects, projectId, crumb: "Projects" };
   },
   head: () => ({
     meta: [{ title: "Projects" }],
   }),
 });
 
-function RouteComponent() {
-  const { data: projects } = useSuspenseQuery(useGetProjects());
+function ProjectList() {
+  const { projects, projectId } = useLoaderData({ from: "/app/project/" });
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChangeProject = async (selectedProjectId: string) => {
+    setIsLoading(true);
+    try {
+      await setProjectIdFn({ data: { projectId: selectedProjectId } });
+      navigate({
+        to: "/app/project",
+        reloadDocument: true,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
-      {projects.map((project) => (
-        <Link
-          to={`/app/project/$projectId`}
-          params={{ projectId: project.id.toString() }}
-          key={project.id}
-        >
-          <Card key={project.id} className="hover:shadow-lg transition-shadow duration-100">
+      {projects.map((project) => {
+        return (
+          <Card
+            key={project.id}
+            onClick={() => handleChangeProject(project.id.toString())}
+            className={cn(
+              "hover:shadow-lg transition-shadow duration-100 cursor-pointer relative",
+              {
+                "border border-green-200 bg-green-50": project.id === Number(projectId),
+              },
+            )}
+          >
+            {isLoading && (
+              <div className="absolute inset-0 bg-black/10 rounded-lg flex items-center justify-center z-10">
+                <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+              </div>
+            )}
             <CardHeader>
               <CardTitle>{project.name}</CardTitle>
               <CardDescription>{project.description}</CardDescription>
@@ -36,8 +68,8 @@ function RouteComponent() {
               <p>Completed Tasks: 0</p>
             </CardContent>
           </Card>
-        </Link>
-      ))}
+        );
+      })}
     </div>
   );
 }

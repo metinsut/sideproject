@@ -13,22 +13,28 @@ import {
 export function BreadCrumb() {
   const matches = useMatches();
 
+  // Array formatındaki crumb'ları topla
   const items = matches
     .map((match) => {
-      const { loaderData, pathname } = match;
-
-      const label = loaderData?.crumb;
-
-      if (!label) {
-        return null;
+      const { loaderData } = match;
+      
+      // Array formatında crumb döndürüyorsa o array'i al
+      if (Array.isArray(loaderData?.crumb)) {
+        return loaderData.crumb;
       }
-
-      return {
-        href: pathname,
-        label,
-      };
+      
+      // String formatında crumb varsa eski formatta işle
+      if (loaderData?.crumb) {
+        return [{
+          href: match.pathname,
+          label: loaderData.crumb,
+        }];
+      }
+      
+      return null;
     })
-    .filter(Boolean);
+    .filter(Boolean)
+    .flat(); // Array'leri birleştir
 
   if (items.length === 0) {
     return null;
@@ -38,7 +44,7 @@ export function BreadCrumb() {
     <Breadcrumb className="hidden md:flex">
       <BreadcrumbList>
         {items.map((crumb, index) => (
-          <Fragment key={crumb?.href}>
+          <Fragment key={crumb?.href || index}>
             <BreadcrumbItem>
               {index === items.length - 1 ? (
                 <BreadcrumbPage>{crumb?.label}</BreadcrumbPage>

@@ -1,11 +1,10 @@
-import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query";
+import { queryOptions, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import type { CreateProjectSchema } from "@/lib/functions/projects/create-project";
 import { createProject } from "@/lib/functions/projects/create-project";
 import { getProjectById } from "@/lib/functions/projects/get-project-by-id";
 import { getProjectFirstIdFn } from "@/lib/functions/projects/get-project-first-id";
 import { getProjects } from "@/lib/functions/projects/get-projects";
-import { setProjectIdFn } from "@/lib/functions/projects/set-project-id";
 
 export function useCreateProject() {
   return useMutation({

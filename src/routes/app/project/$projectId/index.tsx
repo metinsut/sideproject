@@ -6,7 +6,8 @@ export const Route = createFileRoute("/app/project/$projectId/")({
   loader: async ({ context, params }) => {
     const projectId = Number(params.projectId);
     const project = await context.queryClient.ensureQueryData(useGetProjectById(projectId));
-    return { project, crumb: project?.name ?? "Project" };
+    const crumb = [{ label: project?.name ?? "Project", href: "/app/project" }];
+    return { project, crumb };
   },
 });
 
