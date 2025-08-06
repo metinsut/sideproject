@@ -87,6 +87,7 @@ Located in `src/lib/db/schema/`:
 - UI components in `src/components/ui/` (Shadcn UI)
 - Feature components in `src/components/f/`
 - Layout components in route-specific folders (e.g., `app/-layout/`)
+- **IMPORTANT**: Always use official Shadcn UI components via `bunx shadcn@latest add <component>` instead of manually creating UI components
 
 ### Server Functions
 - Database functions in `src/lib/functions/projects/`
