@@ -17,20 +17,22 @@ export function BreadCrumb() {
   const items = matches
     .map((match) => {
       const { loaderData } = match;
-      
+
       // Array formatında crumb döndürüyorsa o array'i al
       if (Array.isArray(loaderData?.crumb)) {
         return loaderData.crumb;
       }
-      
+
       // String formatında crumb varsa eski formatta işle
       if (loaderData?.crumb) {
-        return [{
-          href: match.pathname,
-          label: loaderData.crumb,
-        }];
+        return [
+          {
+            href: match.pathname,
+            label: loaderData.crumb,
+          },
+        ];
       }
-      
+
       return null;
     })
     .filter(Boolean)
