@@ -34,7 +34,7 @@ export const updateTask = createServerFn({
 
     const { id, ...updateData } = data;
 
-    const updatedTask = await db
+    const updatedTask = await db()
       .update(tasks)
       .set({
         ...updateData,

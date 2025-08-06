@@ -26,7 +26,7 @@ export const createTask = createServerFn({
       throw new Error("User not found");
     }
 
-    const newTask = await db
+    const newTask = await db()
       .insert(tasks)
       .values({
         ...data,

@@ -16,7 +16,7 @@ export const deleteTask = createServerFn({
       throw new Error("User not found");
     }
 
-    const deletedTask = await db.delete(tasks).where(eq(tasks.id, data.id)).returning();
+    const deletedTask = await db().delete(tasks).where(eq(tasks.id, data.id)).returning();
 
     if (!deletedTask[0]) {
       throw new Error("Task not found");

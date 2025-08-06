@@ -16,7 +16,7 @@ export const getTasksByProject = createServerFn({
       throw new Error("User not found");
     }
 
-    const projectTasks = await db.query.tasks.findMany({
+    const projectTasks = await db().query.tasks.findMany({
       where: eq(tasks.projectId, data.projectId),
       orderBy: (tasks, { desc }) => [desc(tasks.createdAt)],
     });

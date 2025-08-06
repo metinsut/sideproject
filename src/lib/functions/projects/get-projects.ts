@@ -12,7 +12,7 @@ export const getProjects = createServerFn({
   if (!user) {
     throw new Error("User not found");
   }
-  const projectList = await db.query.projects.findMany({
+  const projectList = await db().query.projects.findMany({
     where: eq(projects.creatorId, user.id),
   });
   return projectList;

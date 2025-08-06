@@ -7,7 +7,7 @@ import { db } from "../db";
 export const auth = betterAuth({
   baseURL: import.meta.env.VITE_BASE_URL,
   secret: import.meta.env.VITE_AUTH_SECRET,
-  database: drizzleAdapter(db, {
+  database: drizzleAdapter(db(), {
     provider: "pg",
   }),
   emailAndPassword: {

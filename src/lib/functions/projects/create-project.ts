@@ -21,7 +21,7 @@ export const createProject = createServerFn({
     if (!user) {
       throw new Error("User not found");
     }
-    const [newProject] = await db
+    const [newProject] = await db()
       .insert(projects)
       .values({
         ...data,

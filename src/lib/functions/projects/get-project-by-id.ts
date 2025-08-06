@@ -15,7 +15,7 @@ export const getProjectById = createServerFn({
     if (!user) {
       throw new Error("User not found");
     }
-    const project = await db.query.projects.findFirst({
+    const project = await db().query.projects.findFirst({
       where: eq(projects.id, data.projectId),
     });
     return project;

@@ -9,6 +9,4 @@ if (!import.meta.env.VITE_DATABASE_URL) {
 
 const driver = postgres(import.meta.env.VITE_DATABASE_URL);
 
-const getDatabase = serverOnly(() => drizzle({ client: driver, schema, casing: "snake_case" }));
-
-export const db = getDatabase();
+export const db = serverOnly(() => drizzle({ client: driver, schema, casing: "snake_case" }));

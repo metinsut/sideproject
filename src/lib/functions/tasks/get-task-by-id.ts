@@ -13,7 +13,7 @@ export async function getTaskById({ data }: { data: GetTaskByIdSchema }) {
   try {
     const validatedData = getTaskByIdSchema.parse(data);
 
-    const [task] = await db.select().from(tasks).where(eq(tasks.id, validatedData.id)).limit(1);
+    const [task] = await db().select().from(tasks).where(eq(tasks.id, validatedData.id)).limit(1);
 
     if (!task) {
       throw new Error("Task not found");
