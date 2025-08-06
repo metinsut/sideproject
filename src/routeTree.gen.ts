@@ -26,6 +26,8 @@ import { Route as AppProjectListIndexRouteImport } from './routes/app/project-li
 import { Route as AppProjectProjectIdIndexRouteImport } from './routes/app/project/$projectId/index'
 import { Route as AppProjectProjectIdTasksIndexRouteImport } from './routes/app/project/$projectId/tasks/index'
 import { Route as AppProjectProjectIdBoardIndexRouteImport } from './routes/app/project/$projectId/board/index'
+import { Route as AppProjectProjectIdTasksNewRouteImport } from './routes/app/project/$projectId/tasks/new'
+import { Route as AppProjectProjectIdTasksTaskIdRouteImport } from './routes/app/project/$projectId/tasks/$taskId'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
 
 const rootServerRouteImport = createServerRootRoute()
@@ -106,6 +108,18 @@ const AppProjectProjectIdBoardIndexRoute =
     path: '/project/$projectId/board/',
     getParentRoute: () => AppRouteRoute,
   } as any)
+const AppProjectProjectIdTasksNewRoute =
+  AppProjectProjectIdTasksNewRouteImport.update({
+    id: '/project/$projectId/tasks/new',
+    path: '/project/$projectId/tasks/new',
+    getParentRoute: () => AppRouteRoute,
+  } as any)
+const AppProjectProjectIdTasksTaskIdRoute =
+  AppProjectProjectIdTasksTaskIdRouteImport.update({
+    id: '/project/$projectId/tasks/$taskId',
+    path: '/project/$projectId/tasks/$taskId',
+    getParentRoute: () => AppRouteRoute,
+  } as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -124,6 +138,8 @@ export interface FileRoutesByFullPath {
   '/app/project-list': typeof AppProjectListIndexRoute
   '/app/project': typeof AppProjectIndexRoute
   '/app/project/$projectId': typeof AppProjectProjectIdIndexRoute
+  '/app/project/$projectId/tasks/$taskId': typeof AppProjectProjectIdTasksTaskIdRoute
+  '/app/project/$projectId/tasks/new': typeof AppProjectProjectIdTasksNewRoute
   '/app/project/$projectId/board': typeof AppProjectProjectIdBoardIndexRoute
   '/app/project/$projectId/tasks': typeof AppProjectProjectIdTasksIndexRoute
 }
@@ -138,6 +154,8 @@ export interface FileRoutesByTo {
   '/app/project-list': typeof AppProjectListIndexRoute
   '/app/project': typeof AppProjectIndexRoute
   '/app/project/$projectId': typeof AppProjectProjectIdIndexRoute
+  '/app/project/$projectId/tasks/$taskId': typeof AppProjectProjectIdTasksTaskIdRoute
+  '/app/project/$projectId/tasks/new': typeof AppProjectProjectIdTasksNewRoute
   '/app/project/$projectId/board': typeof AppProjectProjectIdBoardIndexRoute
   '/app/project/$projectId/tasks': typeof AppProjectProjectIdTasksIndexRoute
 }
@@ -156,6 +174,8 @@ export interface FileRoutesById {
   '/app/project-list/': typeof AppProjectListIndexRoute
   '/app/project/': typeof AppProjectIndexRoute
   '/app/project/$projectId/': typeof AppProjectProjectIdIndexRoute
+  '/app/project/$projectId/tasks/$taskId': typeof AppProjectProjectIdTasksTaskIdRoute
+  '/app/project/$projectId/tasks/new': typeof AppProjectProjectIdTasksNewRoute
   '/app/project/$projectId/board/': typeof AppProjectProjectIdBoardIndexRoute
   '/app/project/$projectId/tasks/': typeof AppProjectProjectIdTasksIndexRoute
 }
@@ -173,6 +193,8 @@ export interface FileRouteTypes {
     | '/app/project-list'
     | '/app/project'
     | '/app/project/$projectId'
+    | '/app/project/$projectId/tasks/$taskId'
+    | '/app/project/$projectId/tasks/new'
     | '/app/project/$projectId/board'
     | '/app/project/$projectId/tasks'
   fileRoutesByTo: FileRoutesByTo
@@ -187,6 +209,8 @@ export interface FileRouteTypes {
     | '/app/project-list'
     | '/app/project'
     | '/app/project/$projectId'
+    | '/app/project/$projectId/tasks/$taskId'
+    | '/app/project/$projectId/tasks/new'
     | '/app/project/$projectId/board'
     | '/app/project/$projectId/tasks'
   id:
@@ -204,6 +228,8 @@ export interface FileRouteTypes {
     | '/app/project-list/'
     | '/app/project/'
     | '/app/project/$projectId/'
+    | '/app/project/$projectId/tasks/$taskId'
+    | '/app/project/$projectId/tasks/new'
     | '/app/project/$projectId/board/'
     | '/app/project/$projectId/tasks/'
   fileRoutesById: FileRoutesById
@@ -342,6 +368,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProjectProjectIdBoardIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/app/project/$projectId/tasks/new': {
+      id: '/app/project/$projectId/tasks/new'
+      path: '/project/$projectId/tasks/new'
+      fullPath: '/app/project/$projectId/tasks/new'
+      preLoaderRoute: typeof AppProjectProjectIdTasksNewRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/project/$projectId/tasks/$taskId': {
+      id: '/app/project/$projectId/tasks/$taskId'
+      path: '/project/$projectId/tasks/$taskId'
+      fullPath: '/app/project/$projectId/tasks/$taskId'
+      preLoaderRoute: typeof AppProjectProjectIdTasksTaskIdRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
   }
 }
 declare module '@tanstack/react-start/server' {
@@ -393,6 +433,8 @@ interface AppRouteRouteChildren {
   AppProjectListIndexRoute: typeof AppProjectListIndexRoute
   AppProjectIndexRoute: typeof AppProjectIndexRoute
   AppProjectProjectIdIndexRoute: typeof AppProjectProjectIdIndexRoute
+  AppProjectProjectIdTasksTaskIdRoute: typeof AppProjectProjectIdTasksTaskIdRoute
+  AppProjectProjectIdTasksNewRoute: typeof AppProjectProjectIdTasksNewRoute
   AppProjectProjectIdBoardIndexRoute: typeof AppProjectProjectIdBoardIndexRoute
   AppProjectProjectIdTasksIndexRoute: typeof AppProjectProjectIdTasksIndexRoute
 }
@@ -402,6 +444,8 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppProjectListIndexRoute: AppProjectListIndexRoute,
   AppProjectIndexRoute: AppProjectIndexRoute,
   AppProjectProjectIdIndexRoute: AppProjectProjectIdIndexRoute,
+  AppProjectProjectIdTasksTaskIdRoute: AppProjectProjectIdTasksTaskIdRoute,
+  AppProjectProjectIdTasksNewRoute: AppProjectProjectIdTasksNewRoute,
   AppProjectProjectIdBoardIndexRoute: AppProjectProjectIdBoardIndexRoute,
   AppProjectProjectIdTasksIndexRoute: AppProjectProjectIdTasksIndexRoute,
 }

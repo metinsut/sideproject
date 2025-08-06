@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import type { CreateTaskSchema } from "@/lib/functions/tasks/create-task";
 import { createTask } from "@/lib/functions/tasks/create-task";
 import { deleteTask } from "@/lib/functions/tasks/delete-task";
+import { getTaskById } from "@/lib/functions/tasks/get-task-by-id";
 import { getTasksByProject } from "@/lib/functions/tasks/get-tasks-by-project";
 import type { UpdateTaskSchema } from "@/lib/functions/tasks/update-task";
 import { updateTask } from "@/lib/functions/tasks/update-task";
@@ -11,6 +12,13 @@ export function useGetTasksByProject(projectId: number) {
   return queryOptions({
     queryKey: ["tasks", "project", projectId],
     queryFn: () => getTasksByProject({ data: { projectId } }),
+  });
+}
+
+export function useGetTaskById(taskId: number) {
+  return queryOptions({
+    queryKey: ["tasks", "task", taskId],
+    queryFn: () => getTaskById({ data: { id: taskId } }),
   });
 }
 

@@ -1,26 +1,26 @@
-"use client";
-import type { Row, Table as TableType } from "@tanstack/react-table";
+import type { Table as TanStackTable } from "@tanstack/react-table";
 import { flexRender } from "@tanstack/react-table";
 import {
+  Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-  Table as TableUI,
 } from "@/components/ui/table";
 
-type Props<T> = {
-  table: TableType<T>;
-  onRowClick?: (row: Row<T>) => void;
-  noResult?: React.ReactNode;
-};
+interface DataTableProps<TData> {
+  table: TanStackTable<TData>;
+  noResultsMessage?: string;
+}
 
-export function Table<T>(props: Props<T>) {
-  const { table, onRowClick, noResult = "No results." } = props;
+export function DataTable<TData>({
+  table,
+  noResultsMessage = "No results.",
+}: DataTableProps<TData>) {
   return (
     <div className="rounded-md border">
-      <TableUI>
+      <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -39,11 +39,7 @@ export function Table<T>(props: Props<T>) {
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-                onClick={() => onRowClick?.(row)}
-              >
+              <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -54,12 +50,12 @@ export function Table<T>(props: Props<T>) {
           ) : (
             <TableRow>
               <TableCell colSpan={table.getAllColumns().length} className="h-24 text-center">
-                {noResult}
+                {noResultsMessage}
               </TableCell>
             </TableRow>
           )}
         </TableBody>
-      </TableUI>
+      </Table>
     </div>
   );
 }

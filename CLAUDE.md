@@ -4,6 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
+### Git
+- Never commit and push before ask.
+
 ### Package Management
 - Use **Bun** as the package manager and runtime (as specified in .cursor rules)
 - Install dependencies: `bun install`
@@ -85,9 +88,8 @@ Located in `src/lib/db/schema/`:
 
 ### Component Structure
 - UI components in `src/components/ui/` (Shadcn UI)
-- Feature components in `src/components/f/`
-- Layout components in route-specific folders (e.g., `app/-layout/`)
 - **IMPORTANT**: Always use official Shadcn UI components via `bunx shadcn@latest add <component>` instead of manually creating UI components
+Please check before install
 
 ### Server Functions
 - Database functions in `src/lib/functions/projects/`
@@ -109,6 +111,7 @@ Required environment variables (all prefixed with `VITE_`):
 - Snake case for database columns
 - Camel case for TypeScript/JavaScript
 - Path aliases: `@/*` maps to `src/*`
+- Separate type imports from value imports (e.g., `import type { ... }` vs `import { ... }`)
 - Auto-generated files like `routeTree.gen.ts` are excluded from linting
 
 ## Project Structure
