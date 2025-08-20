@@ -23,7 +23,7 @@ export function ProjectSelect() {
     await setProjectIdFn({ data: { projectId } });
 
     const pathParts = pathname.split("/");
-    const projectIndex = pathParts.findIndex((part) => part === "project");
+    const projectIndex = pathParts.indexOf("project");
 
     if (projectIndex !== -1 && pathParts.length > projectIndex + 1) {
       const oldProjectId = pathParts[projectIndex + 1];

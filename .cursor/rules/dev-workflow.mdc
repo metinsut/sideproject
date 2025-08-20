@@ -1,0 +1,117 @@
+---
+alwaysApply: false
+---
+## Advantages of this merged rule
+- Clear separation: Mandatory rules (commit messages) vs. reference guidance (workflow).
+- Clear instructions: Each section states what it means for the assistant and how to act.
+- Completeness: Consolidates stack, commands, standards, and notes in one place.
+- Practicality: Enables consistent "what's next" steps and valid commit messages on demand.
+
+## Purpose
+- Reliable local workflow: lint → typecheck → commit → push, leveraging existing root scripts.
+
+## Prerequisites
+- Package manager: Bun
+- Monorepo task runner: Turbo (invoked by root scripts)
+- Lint/format: Biome (invoked by root scripts)
+ 
+
+## Development workflow (reference)
+This section is reference guidance for suggested actions when asked "what should we do next?". For optional secret scanning, see `security-scan.mdc`.
+
+### 1) Lint
+```bash
+bun run lint
+```
+
+If lint fails:
+```bash
+# 1st fallback: auto-fix
+bun run lint:fix && bun run lint
+
+# 2nd fallback: unsafe fix
+bun run lint:unsafe && bun run lint
+
+# If it still fails, perform manual fixes and re-run lint
+```
+
+### 2) Typecheck
+```bash
+bun run typecheck
+```
+
+### 3) Commit
+```bash
+git add -A
+git commit -m "feat(scope): short summary"
+```
+
+### 4) Push
+```bash
+git push -u origin $(git branch --show-current)
+```
+
+## Git & Version Control Standards
+This section is mandatory when the assistant is asked to generate a commit message.
+
+### Purpose
+- Standardize commit messages for readability, automation (changelogs/versioning), and clean history.
+
+### Conventional Commits
+
+#### Message structure
+- Format: `type(scope): subject`
+- Example: `feat(auth): add password reset for users`
+- Example: `fix(ui): fix primary button on mobile`
+
+#### Allowed types
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation only
+- `style`: Code style/formatting that doesn’t affect meaning
+- `refactor`: Code change that neither fixes a bug nor adds a feature
+- `perf`: Performance improvement
+- `test`: Add or fix tests
+- `build`: Build system or external dependencies changes
+- `chore`: Other routine tasks
+
+#### Scope (optional)
+- Area of change: `auth`, `api`, `ui`, `organization`, `competency`, etc.
+
+#### Subject rules
+- Start with lowercase, no trailing period
+- Use imperative mood: “add”, “fix”, “update”
+  - Correct: `add a new feature`
+  - Incorrect: `added a new feature` / `adding a new feature`
+
+#### Body & Footer (when needed)
+- Body: Explain the why/how; wrap lines at ~72
+- Footer:
+  - Breaking changes: `BREAKING CHANGE: ...`
+  - Issue references: `Closes #123`, `Refs: #456`
+
+#### Examples
+```text
+feat(competency): add form fields for basic info step
+
+fix(ui): fix focus state on mobile header search
+
+refactor(shared): simplify date formatting helpers
+
+docs(readme): update developer setup steps
+
+perf(table): reduce render cost on large lists via virtualization
+
+test(analytics): add unit tests for participant charts
+```
+
+### Push guidelines
+- Push only after lint and typecheck pass (follow this file’s flow).
+- Prefer atomic and meaningful commits; squash trivial ones.
+- Do not push secrets/PII; use environment variables.
+- Push after completed `feat`/`fix`; use draft PRs for WIP.
+- Note: `git push` cannot be bound to a rule; treat this as best practice after successful checks.
+
+## Notes
+- Prefer atomic commits; keep PRs focused (see `code-quality.mdc` for PR checklist).
+- If additional package-level checks are needed, wire them into Turbo and expose via root scripts.

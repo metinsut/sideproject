@@ -1,0 +1,74 @@
+---
+description: Global code-quality and assistant behavior guidelines. Always applied to improve clarity, maintainability, performance, and developer UX across the monorepo.
+globs:
+alwaysApply: true
+---
+
+## Guidelines for AI Assistant
+- Default to clean, maintainable, scalable solutions following SOLID.
+- Prefer incremental, minimally invasive edits; avoid broad refactors unless requested.
+- Ask clarifying questions only if truly blocked; otherwise proceed and state assumptions.
+- After edits, ensure type-safety and lints are green; avoid introducing warnings.
+- Match existing conventions and structure. Keep components small and reusable.
+- Use descriptive naming; avoid abbreviations and single-letter variables.
+
+## Core Philosophy
+- Objective: Build high-quality React/TypeScript apps following industry best practices.
+- Goal: Clean, maintainable, scalable, performant code aligned with long-term sustainability.
+
+## Core Principles
+1. Simplicity: Keep code straightforward; avoid unnecessary abstractions.
+2. Readability: Favor clear naming and structure over cleverness.
+3. Performance: Avoid unnecessary renders; keep bundle size in mind.
+4. Maintainability: Clear separation of concerns; colocate logic sensibly.
+5. Testability: Design components/hooks for easy unit and integration testing.
+6. Reusability: Extract common UI and logic into utilities or `packages/ui`.
+7. Scalability: Prefer patterns that extend without breaking changes.
+8. Accessibility: Labels, keyboard nav, focus states, and ARIA where needed.
+
+## Coding Quality Practices
+- TypeScript
+  - Strict types; no `any` unless unavoidable; avoid unsafe casts.
+  - Explicit function signatures for exported APIs; minimal inference for locals.
+  - Prefer DTO types from `@repo/api` and Zod schemas for forms.
+- Naming & Structure
+  - Descriptive names; avoid abbreviations; keep modules focused.
+  - Early returns, shallow nesting, guard clauses; avoid deep trees.
+- Error Handling & UX
+  - Never swallow errors; surface meaningful messages; log with context.
+  - User feedback via `toast` for success/failure where appropriate.
+- Forms & Data
+  - TanStack Form + Zod validation; step-level validation for wizards.
+  - TanStack Query: shape data with `select`; invalidate using specific keys.
+- Performance
+  - Memoize expensive computations; stabilize dependencies.
+  - Consider list virtualization and pagination for large datasets.
+- Accessibility
+  - Use labels/placeholders/aria attributes; support keyboard navigation.
+- Documentation & Comments
+  - Add concise comments for non-obvious logic (explain “why”, not “how”).
+  - Keep files focused; split out complex sections into helpers.
+- Workflow
+  - Run typecheck and lints before completing a task.
+  - Commit atomic changes with clear messages; keep PRs scoped.
+
+## Pull Requests & Reviews
+- Keep PRs focused and under ~300 lines where possible.
+- Provide context in the description: What, Why, How, and Screenshots for UI changes.
+- Add checkboxes for: [ ] typecheck, [ ] lint, [ ] tests (if applicable), [ ] manual QA steps.
+
+## Security & Privacy
+- Avoid logging PII or secrets; scrub sensitive data.
+- Use env variables for keys; never commit secrets.
+- Validate/escape user-generated content; enforce server-side validation.
+
+## Dependency Hygiene
+- Favor lightweight, well-maintained libraries.
+- Avoid adding a dependency for trivial utilities; prefer stdlib/helpers.
+- Periodically prune unused deps; pin versions when necessary.
+
+## UI/UX Micro-Patterns (shadcn/Tailwind)
+- Keep spacing consistent (4/6/8/12 grid), readable contrast, visible focus.
+- Prefer responsive grids over ad-hoc media queries.
+- Loaders and error states are first-class; never leave blank screens.
+
