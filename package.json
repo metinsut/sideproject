@@ -58,6 +58,7 @@
   "devDependencies": {
     "@biomejs/biome": "latest",
     "@types/bun": "latest",
+    "@types/i18next": "^13.0.0",
     "@types/js-cookie": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",

@@ -1,4 +1,7 @@
+"use client";
+
 import type { ColumnDef } from "@tanstack/react-table";
+import dayjs from "dayjs";
 import { Badge } from "@/components/ui/badge";
 import type { tasks } from "@/lib/db/schema";
 import { TaskAction } from "./task-action";
@@ -85,7 +88,7 @@ export function useTaskColumns() {
       accessorKey: "createdAt",
       header: "Created",
       cell: ({ row }) => (
-        <div className="text-sm">{new Date(row.original.createdAt).toLocaleDateString()}</div>
+        <div className="text-sm">{dayjs(row.original.createdAt).format("DD/MM/YYYY") || "-"}</div>
       ),
     },
     {
@@ -94,7 +97,7 @@ export function useTaskColumns() {
       cell: ({ row }) => (
         <div className="text-sm">
           {row.original.updatedAt !== row.original.createdAt
-            ? new Date(row.original.updatedAt).toLocaleDateString()
+            ? dayjs(row.original.updatedAt).format("DD/MM/YYYY")
             : "-"}
         </div>
       ),

@@ -39,7 +39,6 @@ function TaskListPage() {
           </Link>
         </Button>
       </div>
-
       <TaskDataTable columns={columns} data={tasks || []} />
     </div>
   );
