@@ -2,17 +2,14 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
     "includes": [
-      "src/**/*.ts",
-      "src/**/*.tsx",
-      "src/**/*.json",
+      "**",
+      "!src/**/*.css",
+      "public/**",
+      "!drizzle",
       "!src/routeTree.gen.ts",
-      "package.json",
-      "drizzle.config.ts",
-      "vite.config.ts",
-      "biome.json",
       "!node_modules",
-      ".nitro",
-      ".output"
+      "!.nitro",
+      "!.output"
     ]
   },
   "linter": {
@@ -31,14 +28,14 @@
     "lineWidth": 100,
     "expand": "auto",
     "includes": [
-      "src/**/*.ts",
-      "src/**/*.tsx",
-      "src/**/*.json",
+      "**",
+      "!src/**/*.css",
+      "public/**",
+      "!drizzle",
       "!src/routeTree.gen.ts",
-      "package.json",
-      "drizzle.config.ts",
-      "vite.config.ts",
-      "biome.json"
+      "!node_modules",
+      "!.nitro",
+      "!.output"
     ]
   },
   "javascript": {

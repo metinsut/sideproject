@@ -43,7 +43,7 @@
     "drizzle-orm": "latest",
     "drizzle-zod": "latest",
     "i18next": "latest",
-    "i18next-browser-languagedetector": "^8.2.0",
+    "i18next-browser-languagedetector": "latest",
     "js-cookie": "latest",
     "lucide-react": "latest",
     "postgres": "latest",
