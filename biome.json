@@ -4,11 +4,15 @@
     "includes": [
       "src/**/*.ts",
       "src/**/*.tsx",
+      "src/**/*.json",
       "!src/routeTree.gen.ts",
       "package.json",
       "drizzle.config.ts",
       "vite.config.ts",
-      "biome.json"
+      "biome.json",
+      "!node_modules",
+      ".nitro",
+      ".output"
     ]
   },
   "linter": {
@@ -29,6 +33,7 @@
     "includes": [
       "src/**/*.ts",
       "src/**/*.tsx",
+      "src/**/*.json",
       "!src/routeTree.gen.ts",
       "package.json",
       "drizzle.config.ts",

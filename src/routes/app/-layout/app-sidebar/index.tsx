@@ -1,4 +1,5 @@
 import { Sidebar, SidebarContent, SidebarFooter } from "@/components/ui/sidebar";
+import { Localization } from "./localization";
 import { MenuList } from "./menu-list";
 import { NavUser } from "./nav-user";
 import { ProjectSelect } from "./project-select";
@@ -12,6 +13,7 @@ export function AppSidebar(props: SidebarProps) {
         <MenuList />
       </SidebarContent>
       <SidebarFooter>
+        <Localization />
         <ProjectSelect />
         <NavUser />
       </SidebarFooter>

@@ -40,13 +40,38 @@ bun run lint:unsafe && bun run lint
 bun run typecheck
 ```
 
-### 3) Commit
+If typecheck fails:
+stop agent
+ask what should you do?
+
+### 3) Create Commit
 ```bash
 git add -A
-git commit -m "feat(scope): short summary"
 ```
 
-### 4) Push
+### 4) Commit Message
+```bash
+# 1. Review changes in parts and stage them selectively
+git diff           # review all changes first
+git add -p         # stage changes in logical chunks
+
+# 2. Analyze staged changes with a summary
+git diff --cached --stat   # see which files changed and how many lines
+git diff --cached          # view detailed diff
+
+# 3. Write a detailed commit message
+git commit --verbose       # open editor with staged diff shown for context
+
+# Suggested commit message structure:
+# type(scope): short summary (≤50 characters)
+#
+# - Explain why this change was made and what it addresses.
+# - Reference issue number if applicable (Closes #123)
+```
+
+**Important**: Always review all changed files and create a commit message that accurately reflects the scope of changes. Don't focus on just one small change when multiple files and features are modified.
+
+### 5) Push
 ```bash
 git push -u origin $(git branch --show-current)
 ```

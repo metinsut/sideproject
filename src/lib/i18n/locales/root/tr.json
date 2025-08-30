@@ -1,0 +1,19 @@
+{
+  "language": "Dil",
+  "english": "İngilizce",
+  "turkish": "Türkçe",
+  "dashboard": "Kontrol Paneli",
+  "projects": "Projeler",
+  "tasks": "Görevler",
+  "settings": "Ayarlar",
+  "logout": "Çıkış Yap",
+  "loading": "Yükleniyor...",
+  "error": "Hata",
+  "success": "Başarılı",
+  "cancel": "İptal",
+  "save": "Kaydet",
+  "edit": "Düzenle",
+  "delete": "Sil",
+  "create": "Oluştur",
+  "now": "Şu an"
+}
