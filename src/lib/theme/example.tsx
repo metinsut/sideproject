@@ -1,8 +1,6 @@
-/* import { ScriptOnce } from "@tanstack/react-router";
+import { ScriptOnce } from "@tanstack/react-router";
 import { clientOnly, createIsomorphicFn } from "@tanstack/react-start";
-import type { ReactNode } from "react";
-import { createContext, use, useEffect, useState } from "react";
-
+import { createContext, type ReactNode, use, useEffect, useState } from "react";
 import { z } from "zod";
 
 const UserThemeSchema = z.enum(["light", "dark", "system"]).catch("system");
@@ -66,8 +64,7 @@ const themeScript = (() => {
       } else {
         document.documentElement.classList.add(validTheme);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (_e) {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
@@ -119,35 +116,3 @@ export const useTheme = () => {
   }
   return context;
 };
- */
-
-import { useRouter } from "@tanstack/react-router";
-import type { PropsWithChildren } from "react";
-import { createContext, use } from "react";
-import { z } from "zod";
-import { setThemeServerFn } from "@/lib/theme/theme-server";
-
-const themeSchema = z.enum(["light", "dark", "system"]).catch("system");
-export type Theme = z.infer<typeof themeSchema>;
-
-type ThemeContextVal = { theme: Theme; setTheme: (val: Theme) => void };
-type Props = PropsWithChildren<{ theme: Theme }>;
-
-const ThemeContext = createContext<ThemeContextVal | null>(null);
-
-export function ThemeProvider({ children, theme }: Props) {
-  const router = useRouter();
-
-  function setTheme(val: Theme) {
-    setThemeServerFn({ data: val });
-    router.invalidate();
-  }
-
-  return <ThemeContext value={{ theme, setTheme }}>{children}</ThemeContext>;
-}
-
-export function useTheme() {
-  const val = use(ThemeContext);
-  if (!val) throw new Error("useTheme called outside of ThemeProvider!");
-  return val;
-}

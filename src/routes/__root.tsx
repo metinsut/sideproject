@@ -7,7 +7,8 @@ import type { ReactNode } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { getUser } from "@/lib/auth/functions/getUser";
 import { Links } from "@/lib/root/link";
-import { ThemeProvider } from "@/lib/theme/theme-provider";
+import { ThemeProvider, useTheme } from "@/lib/theme/theme-provider";
+import { getThemeServerFn } from "@/lib/theme/theme-server";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -36,6 +37,10 @@ export const Route = createRootRouteWithContext<{
     ],
     links: Links,
   }),
+  loader: async () => {
+    const theme = await getThemeServerFn();
+    return { theme, crumb: null };
+  },
   component: RootComponent,
   notFoundComponent: () => <div>Not Found</div>,
   pendingComponent: () => <div>Loading...</div>,
@@ -43,10 +48,13 @@ export const Route = createRootRouteWithContext<{
 });
 
 function RootComponent() {
+  const { theme } = Route.useLoaderData();
   return (
-    <RootDocument>
-      <Outlet />
-    </RootDocument>
+    <ThemeProvider theme={theme}>
+      <RootDocument>
+        <Outlet />
+      </RootDocument>
+    </ThemeProvider>
   );
 }
 
@@ -55,16 +63,15 @@ type RootDocumentProps = {
 };
 
 function RootDocument({ children }: Readonly<RootDocumentProps>) {
+  const { theme } = useTheme();
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={theme} suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body>
-        <ThemeProvider>
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        {children}
+        <Toaster />
         <Scripts />
       </body>
     </html>
