@@ -11,7 +11,6 @@ import { useTheme } from "@/lib/theme/theme-provider";
 const themeConfig: Record<Theme, { icon: string; label: string }> = {
   light: { icon: "☀️", label: "Light" },
   dark: { icon: "🌙", label: "Dark" },
-  system: { icon: "💻", label: "System" },
 };
 
 export const ThemeToggle = () => {
@@ -34,10 +33,6 @@ export const ThemeToggle = () => {
         <SelectItem value="dark">
           <p>{themeConfig.dark.label}</p>
           <p>{themeConfig.dark.icon}</p>
-        </SelectItem>
-        <SelectItem value="system">
-          <p>{themeConfig.system.label}</p>
-          <p>{themeConfig.system.icon}</p>
         </SelectItem>
       </SelectContent>
     </Select>
