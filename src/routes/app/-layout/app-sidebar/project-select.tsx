@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { setProjectIdFn } from "@/lib/functions/projects/set-project-id";
-import { useGetProjectFirstId, useGetProjects } from "@/queries/projects";
+import { useGetProjectFirstId, useGetProjects } from "@/lib/queries/projects";
 
 export function ProjectSelect() {
   const { data: projects } = useSuspenseQuery(useGetProjects());

@@ -23,7 +23,6 @@ i18n
   .use(LanguageDetector)
   .init({
     resources,
-    lng: SupportedLangs.EN,
     defaultNS: "root",
     ns: ["root", "tasks", "project"],
     fallbackLng: SupportedLangs.EN,
@@ -34,6 +33,15 @@ i18n
       useSuspense: false,
     },
     debug: true,
+    detection: {
+      order: ["cookie", "navigator", "htmlTag"],
+      caches: ["cookie"],
+      cookieMinutes: Number.MAX_SAFE_INTEGER,
+      cookieOptions: {
+        path: "/",
+        sameSite: "strict",
+      },
+    },
   });
 
 export default i18n;

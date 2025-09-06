@@ -1,8 +1,8 @@
 import { createFileRoute, Link, useLoaderData } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useGetProjectById } from "@/queries/projects";
-import { useGetTasksByProject } from "@/queries/tasks";
+import { useGetProjectById } from "@/lib/queries/projects";
+import { useGetTasksByProject } from "@/lib/queries/tasks";
 import { useTaskColumns } from "./-components/task-columns";
 import { TaskDataTable } from "./-components/task-data-table";
 

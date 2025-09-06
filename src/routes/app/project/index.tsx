@@ -1,11 +1,9 @@
 import { createFileRoute, useLoaderData, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getProjectIdFn } from "@/lib/functions/projects/get-project-id";
-import { setProjectIdFn } from "@/lib/functions/projects/set-project-id";
+import { useChangeProject, useGetProjects } from "@/lib/queries/projects";
 import { cn } from "@/lib/utils";
-import { useGetProjects } from "@/queries/projects";
 
 export const Route = createFileRoute("/app/project/")({
   component: ProjectList,
@@ -23,22 +21,19 @@ export const Route = createFileRoute("/app/project/")({
 function ProjectList() {
   const { projects, projectId } = useLoaderData({ from: "/app/project/" });
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation("project");
 
+  const updateProjectMutation = useChangeProject();
+
   const handleChangeProject = async (selectedProjectId: string) => {
-    setIsLoading(true);
-    try {
-      await setProjectIdFn({ data: { projectId: selectedProjectId } });
-      navigate({
-        to: "/app/project",
-        reloadDocument: true,
-      });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
+    updateProjectMutation.mutateAsync(selectedProjectId, {
+      onSuccess: () => {
+        navigate({
+          to: "/app/project",
+          reloadDocument: true,
+        });
+      },
+    });
   };
 
   return (
@@ -57,7 +52,7 @@ function ProjectList() {
                 },
               )}
             >
-              {isLoading && (
+              {updateProjectMutation.isPending && (
                 <div className="absolute inset-0 bg-black/10 rounded-lg flex items-center justify-center z-10">
                   <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
                 </div>

@@ -1,7 +1,7 @@
 import { createFileRoute, useLoaderData, useNavigate } from "@tanstack/react-router";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import type { UpdateTaskSchema } from "@/lib/functions/tasks/update-task";
-import { useGetTaskById, useUpdateTask } from "@/queries/tasks";
+import { useGetTaskById, useUpdateTask } from "@/lib/queries/tasks";
 import { TaskForm } from "./-components/task-form";
 
 export const Route = createFileRoute("/app/project/$projectId/tasks/$taskId")({
@@ -27,7 +27,7 @@ function TaskEditModal() {
   const updateTaskMutation = useUpdateTask();
 
   const handleSubmit = (data: UpdateTaskSchema) => {
-    updateTaskMutation.mutate(data, {
+    updateTaskMutation.mutateAsync(data, {
       onSuccess: () => {
         navigate({
           to: "/app/project/$projectId/tasks",

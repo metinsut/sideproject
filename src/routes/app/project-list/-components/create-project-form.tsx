@@ -3,7 +3,7 @@ import { useRouter } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useCreateProject } from "@/queries/projects";
+import { useCreateProject } from "@/lib/queries/projects";
 
 export function CreateProjectForm() {
   const router = useRouter();

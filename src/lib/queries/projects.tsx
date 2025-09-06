@@ -5,6 +5,7 @@ import { createProject } from "@/lib/functions/projects/create-project";
 import { getProjectById } from "@/lib/functions/projects/get-project-by-id";
 import { getProjectFirstIdFn } from "@/lib/functions/projects/get-project-first-id";
 import { getProjects } from "@/lib/functions/projects/get-projects";
+import { setProjectIdFn } from "../functions/projects/set-project-id";
 
 export function useCreateProject() {
   return useMutation({
@@ -74,5 +75,11 @@ export function useGetProjectFirstId() {
   return queryOptions({
     queryKey: [projectIdKey],
     queryFn: () => getProjectFirstIdFn(),
+  });
+}
+
+export function useChangeProject() {
+  return useMutation({
+    mutationFn: (projectId: string) => setProjectIdFn({ data: { projectId } }),
   });
 }

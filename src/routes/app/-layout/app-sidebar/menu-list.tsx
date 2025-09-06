@@ -6,7 +6,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { useGetProjectFirstId } from "@/queries/projects";
+import { useGetProjectFirstId } from "@/lib/queries/projects";
 import { LinkItem } from "./link-item";
 
 export function MenuList() {

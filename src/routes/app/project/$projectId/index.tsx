@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useGetProjectById } from "@/queries/projects";
+import { useGetProjectById } from "@/lib/queries/projects";
 
 export const Route = createFileRoute("/app/project/$projectId/")({
   component: RouteComponent,

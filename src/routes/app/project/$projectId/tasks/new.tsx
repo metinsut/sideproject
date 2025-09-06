@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import type { CreateTaskSchema } from "@/lib/functions/tasks/create-task";
-import { useCreateTask } from "@/queries/tasks";
+import { useCreateTask } from "@/lib/queries/tasks";
 import { TaskForm } from "./-components/task-form";
 
 export const Route = createFileRoute("/app/project/$projectId/tasks/new")({

@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useDeleteTask } from "@/queries/tasks";
+import { useDeleteTask } from "@/lib/queries/tasks";
 
 type Props = {
   taskId: number;

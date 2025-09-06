@@ -2,7 +2,7 @@ import { createFileRoute, useLoaderData } from "@tanstack/react-router";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { Suspense } from "react";
 import { DataTable } from "@/components/custom/table";
-import { useGetProjects } from "@/queries/projects";
+import { useGetProjects } from "@/lib/queries/projects";
 import { useColumns } from "./-columns";
 import { Toolbar } from "./-toolbar";
 
