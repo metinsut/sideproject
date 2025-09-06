@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { getUser } from "@/lib/auth/functions/getUser";
 import { Links } from "@/lib/root/link";
+import { ThemeProvider } from "@/lib/theme/theme-provider";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -55,13 +56,15 @@ type RootDocumentProps = {
 
 function RootDocument({ children }: Readonly<RootDocumentProps>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body>
-        {children}
-        <Toaster />
+        <ThemeProvider>
+          {children}
+          <Toaster />
+        </ThemeProvider>
         <Scripts />
       </body>
     </html>

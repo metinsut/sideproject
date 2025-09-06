@@ -3,6 +3,7 @@ import { Localization } from "./localization";
 import { MenuList } from "./menu-list";
 import { NavUser } from "./nav-user";
 import { ProjectSelect } from "./project-select";
+import { ThemeToggle } from "./theme-toggle";
 
 type SidebarProps = React.ComponentProps<typeof Sidebar>;
 
@@ -13,6 +14,7 @@ export function AppSidebar(props: SidebarProps) {
         <MenuList />
       </SidebarContent>
       <SidebarFooter>
+        <ThemeToggle />
         <Localization />
         <ProjectSelect />
         <NavUser />
