@@ -1,9 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
-import { getUser } from "@/lib/auth/functions/getUser";
 import { db } from "@/lib/db";
 import { taskPriorityEnum, taskStatusEnum, tasks } from "@/lib/db/schema";
+import { getUser } from "@/lib/functions/auth/getUser";
 
 const updateTaskSchema = z.object({
   id: z.number(),

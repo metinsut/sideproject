@@ -32,7 +32,6 @@ i18n
     react: {
       useSuspense: false,
     },
-    debug: true,
     detection: {
       order: ["cookie", "navigator", "htmlTag"],
       caches: ["cookie"],

@@ -1,9 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
-import { getUser } from "@/lib/auth/functions/getUser";
 import { db } from "@/lib/db";
 import { projects } from "@/lib/db/schema";
+import { getUser } from "@/lib/functions/auth/getUser";
 
 export const getProjectById = createServerFn({
   method: "GET",

@@ -1,8 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { getUser } from "@/lib/auth/functions/getUser";
 import { db } from "@/lib/db";
 import { projects } from "@/lib/db/schema";
+import { getUser } from "@/lib/functions/auth/getUser";
 
 export const createProjectSchema = z.object({
   name: z.string().min(3),

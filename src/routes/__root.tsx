@@ -5,7 +5,7 @@ import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { Toaster } from "@/components/ui/sonner";
-import { getUser } from "@/lib/auth/functions/getUser";
+import { getUser } from "@/lib/functions/auth/getUser";
 import { Links } from "@/lib/root/link";
 import { ThemeProvider, useTheme } from "@/lib/theme/theme-provider";
 import { getThemeServerFn } from "@/lib/theme/theme-server";
