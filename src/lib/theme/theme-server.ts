@@ -1,21 +1,12 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getCookie, setCookie } from "@tanstack/react-start/server";
-import type { Theme } from "./theme-provider";
-
-const storageKey = "ui-theme";
+import { getCookie } from "@tanstack/react-start/server";
+import type { ThemeTypes } from "./types";
+import { ThemeEnum, themeCookieName } from "./types";
 
 export const getThemeServerFn = createServerFn().handler(async () => {
-  const cookieTheme = getCookie(storageKey) as Theme;
-  return cookieTheme || "light";
+  const cookieTheme = getCookie(themeCookieName) ?? ThemeEnum.light;
+  const theme = Object.values(ThemeEnum).includes(cookieTheme as ThemeEnum)
+    ? cookieTheme
+    : ThemeEnum.light;
+  return theme as ThemeTypes;
 });
-
-export const setThemeServerFn = createServerFn({ method: "POST" })
-  .validator((data: unknown) => {
-    if (typeof data !== "string" || (data !== "dark" && data !== "light" && data !== "system")) {
-      throw new Error("Invalid theme provided");
-    }
-    return data;
-  })
-  .handler(async ({ data }) => {
-    setCookie(storageKey, data);
-  });

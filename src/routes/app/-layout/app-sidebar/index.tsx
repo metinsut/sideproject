@@ -1,8 +1,8 @@
+"use client";
 import { Sidebar, SidebarContent, SidebarFooter } from "@/components/ui/sidebar";
 import { Localization } from "./localization";
 import { MenuList } from "./menu-list";
 import { NavUser } from "./nav-user";
-import { ProjectSelect } from "./project-select";
 import { ThemeToggle } from "./theme-toggle";
 
 type SidebarProps = React.ComponentProps<typeof Sidebar>;
@@ -16,7 +16,6 @@ export function AppSidebar(props: SidebarProps) {
       <SidebarFooter>
         <ThemeToggle />
         <Localization />
-        <ProjectSelect />
         <NavUser />
       </SidebarFooter>
     </Sidebar>

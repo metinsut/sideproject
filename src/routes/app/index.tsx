@@ -9,6 +9,6 @@ export const Route = createFileRoute("/app/")({
   },
 });
 
-export default function Dashboard() {
+function Dashboard() {
   return <div>App Home "/app/"</div>;
 }

@@ -7,8 +7,8 @@ import type { ReactNode } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { getUser } from "@/lib/functions/auth/getUser";
 import { Links } from "@/lib/root/link";
-import { ThemeProvider, useTheme } from "@/lib/theme/theme-provider";
 import { getThemeServerFn } from "@/lib/theme/theme-server";
+import type { ThemeTypes } from "@/lib/theme/types";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -50,20 +50,19 @@ export const Route = createRootRouteWithContext<{
 function RootComponent() {
   const { theme } = Route.useLoaderData();
   return (
-    <ThemeProvider theme={theme}>
-      <RootDocument>
-        <Outlet />
-      </RootDocument>
-    </ThemeProvider>
+    <RootDocument theme={theme}>
+      <Outlet />
+    </RootDocument>
   );
 }
 
 type RootDocumentProps = {
   children: ReactNode;
+  theme: ThemeTypes;
 };
 
-function RootDocument({ children }: Readonly<RootDocumentProps>) {
-  const { theme } = useTheme();
+function RootDocument(props: Readonly<RootDocumentProps>) {
+  const { children, theme } = props;
   return (
     <html lang="en" className={theme} suppressHydrationWarning>
       <head>

@@ -1,3 +1,6 @@
+"use client";
+import Cookies from "js-cookie";
+import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -5,36 +8,42 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { Theme } from "@/lib/theme/theme-provider";
-import { useTheme } from "@/lib/theme/theme-provider";
+import type { ThemeTypes } from "@/lib/theme/types";
+import { ThemeEnum, themeCookieName } from "@/lib/theme/types";
 
-const themeConfig: Record<Theme, { icon: string; label: string }> = {
+const themeConfig: Record<ThemeTypes, { icon: string; label: string }> = {
   light: { icon: "☀️", label: "Light" },
   dark: { icon: "🌙", label: "Dark" },
 };
 
-export const ThemeToggle = () => {
-  const { theme, setTheme } = useTheme();
+export function ThemeToggle() {
+  const theme = Cookies.get(themeCookieName) ?? ThemeEnum.light;
+  const [cookieTheme, setCookieTheme] = useState<ThemeTypes>(theme as ThemeTypes);
 
-  const handleThemeChange = (theme: Theme) => {
-    setTheme(theme);
+  const handleThemeChange = (newTheme: string) => {
+    Cookies.set(themeCookieName, newTheme);
+    setCookieTheme(newTheme as ThemeTypes);
+
+    const root = document.documentElement;
+    root.classList.remove("light", "dark");
+    root.classList.add(newTheme);
   };
 
   return (
-    <Select value={theme} onValueChange={handleThemeChange}>
+    <Select value={cookieTheme} onValueChange={handleThemeChange}>
       <SelectTrigger className="w-full">
-        <SelectValue placeholder={theme} />
+        <SelectValue placeholder={cookieTheme} />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="light">
-          <p>{themeConfig.light.label}</p>
-          <p>{themeConfig.light.icon}</p>
-        </SelectItem>
-        <SelectItem value="dark">
-          <p>{themeConfig.dark.label}</p>
-          <p>{themeConfig.dark.icon}</p>
-        </SelectItem>
+        {Object.entries(themeConfig).map(([key, config]) => (
+          <SelectItem key={key} value={key}>
+            <div className="flex items-center gap-2">
+              <span>{config.icon}</span>
+              <span>{config.label}</span>
+            </div>
+          </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   );
-};
+}

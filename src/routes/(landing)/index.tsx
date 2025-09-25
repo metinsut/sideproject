@@ -8,7 +8,7 @@ export const Route = createFileRoute("/(landing)/")({
   component: LandingPage,
 });
 
-export default function LandingPage() {
+function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <LandingHeader />

@@ -1,7 +1,5 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/routes/app/-layout/app-sidebar";
-import { Header } from "@/routes/app/-layout/header";
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { AppLayout } from "@/routes/app/-layout";
 
 export const Route = createFileRoute("/app")({
   beforeLoad: async ({ context }) => {
@@ -11,21 +9,9 @@ export const Route = createFileRoute("/app")({
       });
     }
   },
-  component: AppLayout,
+  component: AppRoot,
 });
 
-function AppLayout() {
-  return (
-    <div className="[--header-height:calc(--spacing(14))]">
-      <SidebarProvider className="flex flex-col">
-        <Header />
-        <div className="flex flex-1">
-          <AppSidebar />
-          <SidebarInset>
-            <div className="flex-1 px-4 py-2">{<Outlet />}</div>
-          </SidebarInset>
-        </div>
-      </SidebarProvider>
-    </div>
-  );
+function AppRoot() {
+  return <AppLayout />;
 }

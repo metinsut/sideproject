@@ -1,3 +1,4 @@
+"use client";
 import { Link, useMatches } from "@tanstack/react-router";
 import { Fragment } from "react";
 

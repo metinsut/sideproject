@@ -1,3 +1,4 @@
+"use client";
 import { useRouteContext, useRouter } from "@tanstack/react-router";
 import { BadgeCheck, Bell, ChevronsUpDown, Folder, LogOut, Sparkles } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
