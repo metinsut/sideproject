@@ -82,7 +82,7 @@ export function useUpdateTask() {
     mutationFn: (data: UpdateTaskSchema) => updateTask({ data }),
 
     onSuccess: (updatedTask) => {
-      queryClient.invalidateQueries({ queryKey: ["tasks", "project", updatedTask.projectId] });
+      queryClient.invalidateQueries({ queryKey: ["tasks", "project", updatedTask?.projectId] });
       toast.success("Task başarıyla güncellendi!");
     },
 

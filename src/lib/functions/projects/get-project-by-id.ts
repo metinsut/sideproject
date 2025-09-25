@@ -7,15 +7,14 @@ import { getUser } from "@/lib/functions/auth/getUser";
 
 export const getProjectById = createServerFn({
   method: "GET",
-  response: "data",
 })
-  .validator((payload) => z.object({ projectId: z.number() }).parse(payload))
+  .inputValidator((payload) => z.object({ projectId: z.number() }).parse(payload))
   .handler(async ({ data }) => {
     const user = await getUser();
     if (!user) {
       throw new Error("User not found");
     }
-    const project = await db().query.projects.findFirst({
+    const project = await db()?.query.projects.findFirst({
       where: eq(projects.id, data.projectId),
     });
     return project;

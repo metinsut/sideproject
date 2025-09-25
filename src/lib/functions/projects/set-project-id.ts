@@ -6,9 +6,8 @@ export const PROJECT_ID = "selected_project_id";
 
 export const setProjectIdFn = createServerFn({
   method: "POST",
-  response: "data",
 })
-  .validator(z.object({ projectId: z.string() }))
+  .inputValidator(z.object({ projectId: z.string() }))
   .handler(async ({ data: { projectId } }) => {
     setCookie(PROJECT_ID, projectId, {
       httpOnly: true,

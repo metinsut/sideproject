@@ -7,18 +7,17 @@ import { getUser } from "@/lib/functions/auth/getUser";
 
 export const deleteTask = createServerFn({
   method: "POST",
-  response: "data",
 })
-  .validator((payload) => z.object({ id: z.number() }).parse(payload))
+  .inputValidator((payload) => z.object({ id: z.number() }).parse(payload))
   .handler(async ({ data }) => {
     const user = await getUser();
     if (!user) {
       throw new Error("User not found");
     }
 
-    const deletedTask = await db().delete(tasks).where(eq(tasks.id, data.id)).returning();
+    const deletedTask = await db()?.delete(tasks).where(eq(tasks.id, data.id)).returning();
 
-    if (!deletedTask[0]) {
+    if (!deletedTask?.[0]) {
       throw new Error("Task not found");
     }
 

@@ -23,9 +23,8 @@ export type UpdateTaskSchema = z.infer<typeof updateTaskSchema>;
 
 export const updateTask = createServerFn({
   method: "POST",
-  response: "data",
 })
-  .validator((payload) => updateTaskSchema.parse(payload))
+  .inputValidator((payload) => updateTaskSchema.parse(payload))
   .handler(async ({ data }) => {
     const user = await getUser();
     if (!user) {
@@ -35,7 +34,7 @@ export const updateTask = createServerFn({
     const { id, ...updateData } = data;
 
     const updatedTask = await db()
-      .update(tasks)
+      ?.update(tasks)
       .set({
         ...updateData,
         updatedAt: new Date(),
@@ -43,7 +42,7 @@ export const updateTask = createServerFn({
       .where(eq(tasks.id, id))
       .returning();
 
-    if (!updatedTask[0]) {
+    if (!updatedTask?.[0]) {
       throw new Error("Task not found");
     }
 

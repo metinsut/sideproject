@@ -11,23 +11,20 @@ export const createProjectSchema = z.object({
 
 export type CreateProjectSchema = z.infer<typeof createProjectSchema>;
 
-export const createProject = createServerFn({
-  method: "POST",
-  response: "data",
-})
-  .validator((payload) => createProjectSchema.parse(payload))
+export const createProject = createServerFn({ method: "POST" })
+  .inputValidator((payload) => createProjectSchema.parse(payload))
   .handler(async ({ data }) => {
     const user = await getUser();
     if (!user) {
       throw new Error("User not found");
     }
-    const [newProject] = await db()
-      .insert(projects)
+    const newProject = await db()
+      ?.insert(projects)
       .values({
         ...data,
         creatorId: user.id,
       })
       .returning();
 
-    return newProject;
+    return newProject?.[0];
   });

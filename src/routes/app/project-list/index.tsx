@@ -20,7 +20,7 @@ function RouteComponent() {
   const columns = useColumns();
 
   const table = useReactTable({
-    data: projects,
+    data: projects ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
   });

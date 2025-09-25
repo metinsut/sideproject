@@ -1,5 +1,5 @@
 import { betterAuth } from "better-auth";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { type DB, drizzleAdapter } from "better-auth/adapters/drizzle";
 import { admin } from "better-auth/plugins";
 import { reactStartCookies } from "better-auth/react-start";
 import { db } from "../db";
@@ -7,7 +7,7 @@ import { db } from "../db";
 export const auth = betterAuth({
   baseURL: import.meta.env.VITE_BASE_URL,
   secret: import.meta.env.VITE_AUTH_SECRET,
-  database: drizzleAdapter(db(), {
+  database: drizzleAdapter(db() as DB, {
     provider: "pg",
   }),
   emailAndPassword: {

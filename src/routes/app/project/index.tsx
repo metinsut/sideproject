@@ -17,6 +17,5 @@ export const Route = createFileRoute("/app/project/")({
 });
 
 function ProjectList() {
-  return null;
-  // return <Project />;
+  return <Project />;
 }

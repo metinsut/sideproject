@@ -26,7 +26,7 @@ export function Project() {
     <div className="grid gap-4">
       <p className="text-2xl font-bold">{t("projects")}</p>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
-        {projects.map((project) => {
+        {projects?.map((project) => {
           return (
             <Card
               key={project.id}

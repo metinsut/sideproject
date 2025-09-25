@@ -17,9 +17,8 @@ export type CreateTaskSchema = z.infer<typeof createTaskSchema>;
 
 export const createTask = createServerFn({
   method: "POST",
-  response: "data",
 })
-  .validator((payload) => createTaskSchema.parse(payload))
+  .inputValidator((payload) => createTaskSchema.parse(payload))
   .handler(async ({ data }) => {
     const user = await getUser();
     if (!user) {
@@ -27,7 +26,7 @@ export const createTask = createServerFn({
     }
 
     const newTask = await db()
-      .insert(tasks)
+      ?.insert(tasks)
       .values({
         ...data,
         creatorId: user.id,
@@ -35,5 +34,5 @@ export const createTask = createServerFn({
       })
       .returning();
 
-    return newTask[0];
+    return newTask?.[0];
   });

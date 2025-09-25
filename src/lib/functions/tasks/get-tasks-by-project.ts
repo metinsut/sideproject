@@ -7,16 +7,15 @@ import { getUser } from "@/lib/functions/auth/getUser";
 
 export const getTasksByProject = createServerFn({
   method: "GET",
-  response: "data",
 })
-  .validator((payload) => z.object({ projectId: z.number() }).parse(payload))
+  .inputValidator((payload) => z.object({ projectId: z.number() }).parse(payload))
   .handler(async ({ data }) => {
     const user = await getUser();
     if (!user) {
       throw new Error("User not found");
     }
 
-    const projectTasks = await db().query.tasks.findMany({
+    const projectTasks = await db()?.query.tasks.findMany({
       where: eq(tasks.projectId, data.projectId),
       orderBy: (tasks, { desc }) => [desc(tasks.createdAt)],
     });

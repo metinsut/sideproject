@@ -8,8 +8,6 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createServerRootRoute } from '@tanstack/react-start/server'
-
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteRouteImport } from './routes/app/route'
 import { Route as landingRouteRouteImport } from './routes/(landing)/route'
@@ -23,14 +21,12 @@ import { Route as authLoginRouteImport } from './routes/(auth)/login'
 import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
 import { Route as AppProjectIndexRouteImport } from './routes/app/project/index'
 import { Route as AppProjectListIndexRouteImport } from './routes/app/project-list/index'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as AppProjectProjectIdIndexRouteImport } from './routes/app/project/$projectId/index'
 import { Route as AppProjectProjectIdTasksIndexRouteImport } from './routes/app/project/$projectId/tasks/index'
 import { Route as AppProjectProjectIdBoardIndexRouteImport } from './routes/app/project/$projectId/board/index'
 import { Route as AppProjectProjectIdTasksNewRouteImport } from './routes/app/project/$projectId/tasks/new'
 import { Route as AppProjectProjectIdTasksTaskIdRouteImport } from './routes/app/project/$projectId/tasks/$taskId'
-import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
-
-const rootServerRouteImport = createServerRootRoute()
 
 const AppRouteRoute = AppRouteRouteImport.update({
   id: '/app',
@@ -90,6 +86,11 @@ const AppProjectListIndexRoute = AppProjectListIndexRouteImport.update({
   path: '/project-list/',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppProjectProjectIdIndexRoute =
   AppProjectProjectIdIndexRouteImport.update({
     id: '/project/$projectId/',
@@ -120,11 +121,6 @@ const AppProjectProjectIdTasksTaskIdRoute =
     path: '/project/$projectId/tasks/$taskId',
     getParentRoute: () => AppRouteRoute,
   } as any)
-const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
-  id: '/api/auth/$',
-  path: '/api/auth/$',
-  getParentRoute: () => rootServerRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof landingIndexRoute
@@ -135,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof authRegisterRoute
   '/terms': typeof authTermsRoute
   '/app/': typeof AppIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/app/project-list': typeof AppProjectListIndexRoute
   '/app/project': typeof AppProjectIndexRoute
   '/app/project/$projectId': typeof AppProjectProjectIdIndexRoute
@@ -151,6 +148,7 @@ export interface FileRoutesByTo {
   '/register': typeof authRegisterRoute
   '/terms': typeof authTermsRoute
   '/app': typeof AppIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/app/project-list': typeof AppProjectListIndexRoute
   '/app/project': typeof AppProjectIndexRoute
   '/app/project/$projectId': typeof AppProjectProjectIdIndexRoute
@@ -171,6 +169,7 @@ export interface FileRoutesById {
   '/(auth)/terms': typeof authTermsRoute
   '/(landing)/': typeof landingIndexRoute
   '/app/': typeof AppIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/app/project-list/': typeof AppProjectListIndexRoute
   '/app/project/': typeof AppProjectIndexRoute
   '/app/project/$projectId/': typeof AppProjectProjectIdIndexRoute
@@ -190,6 +189,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/terms'
     | '/app/'
+    | '/api/auth/$'
     | '/app/project-list'
     | '/app/project'
     | '/app/project/$projectId'
@@ -206,6 +206,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/terms'
     | '/app'
+    | '/api/auth/$'
     | '/app/project-list'
     | '/app/project'
     | '/app/project/$projectId'
@@ -225,6 +226,7 @@ export interface FileRouteTypes {
     | '/(auth)/terms'
     | '/(landing)/'
     | '/app/'
+    | '/api/auth/$'
     | '/app/project-list/'
     | '/app/project/'
     | '/app/project/$projectId/'
@@ -238,27 +240,7 @@ export interface RootRouteChildren {
   authRouteRoute: typeof authRouteRouteWithChildren
   landingRouteRoute: typeof landingRouteRouteWithChildren
   AppRouteRoute: typeof AppRouteRouteWithChildren
-}
-export interface FileServerRoutesByFullPath {
-  '/api/auth/$': typeof ApiAuthSplatServerRoute
-}
-export interface FileServerRoutesByTo {
-  '/api/auth/$': typeof ApiAuthSplatServerRoute
-}
-export interface FileServerRoutesById {
-  __root__: typeof rootServerRouteImport
-  '/api/auth/$': typeof ApiAuthSplatServerRoute
-}
-export interface FileServerRouteTypes {
-  fileServerRoutesByFullPath: FileServerRoutesByFullPath
-  fullPaths: '/api/auth/$'
-  fileServerRoutesByTo: FileServerRoutesByTo
-  to: '/api/auth/$'
-  id: '__root__' | '/api/auth/$'
-  fileServerRoutesById: FileServerRoutesById
-}
-export interface RootServerRouteChildren {
-  ApiAuthSplatServerRoute: typeof ApiAuthSplatServerRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -347,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProjectListIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/app/project/$projectId/': {
       id: '/app/project/$projectId/'
       path: '/project/$projectId'
@@ -381,17 +370,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/app/project/$projectId/tasks/$taskId'
       preLoaderRoute: typeof AppProjectProjectIdTasksTaskIdRouteImport
       parentRoute: typeof AppRouteRoute
-    }
-  }
-}
-declare module '@tanstack/react-start/server' {
-  interface ServerFileRoutesByPath {
-    '/api/auth/$': {
-      id: '/api/auth/$'
-      path: '/api/auth/$'
-      fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthSplatServerRouteImport
-      parentRoute: typeof rootServerRouteImport
     }
   }
 }
@@ -458,13 +436,17 @@ const rootRouteChildren: RootRouteChildren = {
   authRouteRoute: authRouteRouteWithChildren,
   landingRouteRoute: landingRouteRouteWithChildren,
   AppRouteRoute: AppRouteRouteWithChildren,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-const rootServerRouteChildren: RootServerRouteChildren = {
-  ApiAuthSplatServerRoute: ApiAuthSplatServerRoute,
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
 }
-export const serverRouteTree = rootServerRouteImport
-  ._addFileChildren(rootServerRouteChildren)
-  ._addFileTypes<FileServerRouteTypes>()
