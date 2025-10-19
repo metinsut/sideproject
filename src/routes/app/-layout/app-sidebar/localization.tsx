@@ -1,5 +1,4 @@
 "use client";
-import { useTranslation } from "react-i18next";
 import {
   Select,
   SelectContent,
@@ -9,20 +8,18 @@ import {
 } from "@/components/ui/select";
 
 export function Localization() {
-  const { t, i18n } = useTranslation();
-
   const handleChangeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
+    console.log(language);
   };
 
   return (
-    <Select value={i18n.language} onValueChange={handleChangeLanguage}>
+    <Select value="en" onValueChange={handleChangeLanguage}>
       <SelectTrigger className="w-full">
-        <SelectValue placeholder={t("language")} />
+        <SelectValue placeholder="Language" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="en">{t("english")}</SelectItem>
-        <SelectItem value="tr">{t("turkish")}</SelectItem>
+        <SelectItem value="en">English</SelectItem>
+        <SelectItem value="tr">Turkish</SelectItem>
       </SelectContent>
     </Select>
   );

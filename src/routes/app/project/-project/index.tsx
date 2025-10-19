@@ -1,5 +1,4 @@
 import { useLoaderData, useNavigate } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useChangeProject } from "@/lib/queries/projects";
 import { cn } from "@/lib/utils";
@@ -7,7 +6,6 @@ import { cn } from "@/lib/utils";
 export function Project() {
   const { projects, projectId } = useLoaderData({ from: "/app/project/" });
   const navigate = useNavigate();
-  const { t } = useTranslation("project");
 
   const updateProjectMutation = useChangeProject();
 
@@ -24,7 +22,7 @@ export function Project() {
 
   return (
     <div className="grid gap-4">
-      <p className="text-2xl font-bold">{t("projects")}</p>
+      <p className="text-2xl font-bold">Projects</p>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
         {projects?.map((project) => {
           return (

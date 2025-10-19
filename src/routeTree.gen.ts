@@ -123,13 +123,13 @@ const AppProjectProjectIdTasksTaskIdRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof landingIndexRoute
   '/app': typeof AppRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
   '/login': typeof authLoginRoute
   '/privacy': typeof authPrivacyRoute
   '/register': typeof authRegisterRoute
   '/terms': typeof authTermsRoute
+  '/': typeof landingIndexRoute
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/app/project-list': typeof AppProjectListIndexRoute
@@ -141,12 +141,12 @@ export interface FileRoutesByFullPath {
   '/app/project/$projectId/tasks': typeof AppProjectProjectIdTasksIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof landingIndexRoute
   '/forgot-password': typeof authForgotPasswordRoute
   '/login': typeof authLoginRoute
   '/privacy': typeof authPrivacyRoute
   '/register': typeof authRegisterRoute
   '/terms': typeof authTermsRoute
+  '/': typeof landingIndexRoute
   '/app': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/app/project-list': typeof AppProjectListIndexRoute
@@ -181,13 +181,13 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/app'
     | '/forgot-password'
     | '/login'
     | '/privacy'
     | '/register'
     | '/terms'
+    | '/'
     | '/app/'
     | '/api/auth/$'
     | '/app/project-list'
@@ -199,12 +199,12 @@ export interface FileRouteTypes {
     | '/app/project/$projectId/tasks'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/forgot-password'
     | '/login'
     | '/privacy'
     | '/register'
     | '/terms'
+    | '/'
     | '/app'
     | '/api/auth/$'
     | '/app/project-list'
@@ -254,15 +254,15 @@ declare module '@tanstack/react-router' {
     }
     '/(landing)': {
       id: '/(landing)'
-      path: '/'
-      fullPath: '/'
+      path: ''
+      fullPath: ''
       preLoaderRoute: typeof landingRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(auth)': {
       id: '/(auth)'
-      path: '/'
-      fullPath: '/'
+      path: ''
+      fullPath: ''
       preLoaderRoute: typeof authRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
