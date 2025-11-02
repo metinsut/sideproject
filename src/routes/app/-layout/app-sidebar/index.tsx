@@ -1,4 +1,3 @@
-"use client";
 import { Sidebar, SidebarContent, SidebarFooter } from "@/components/ui/sidebar";
 import { Localization } from "./localization";
 import { MenuList } from "./menu-list";

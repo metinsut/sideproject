@@ -1,4 +1,4 @@
-"use client";
+import { ClientOnly } from "@tanstack/react-router";
 import {
   Select,
   SelectContent,
@@ -13,14 +13,16 @@ export function Localization() {
   };
 
   return (
-    <Select value="en" onValueChange={handleChangeLanguage}>
-      <SelectTrigger className="w-full">
-        <SelectValue placeholder="Language" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="en">English</SelectItem>
-        <SelectItem value="tr">Turkish</SelectItem>
-      </SelectContent>
-    </Select>
+    <ClientOnly fallback={<div>Loading...</div>}>
+      <Select value="en" onValueChange={handleChangeLanguage}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="Language" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="en">English</SelectItem>
+          <SelectItem value="tr">Turkish</SelectItem>
+        </SelectContent>
+      </Select>
+    </ClientOnly>
   );
 }
