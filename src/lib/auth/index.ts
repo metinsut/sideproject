@@ -1,7 +1,7 @@
 import { betterAuth } from "better-auth";
 import { type DB, drizzleAdapter } from "better-auth/adapters/drizzle";
 import { admin } from "better-auth/plugins";
-import { reactStartCookies } from "better-auth/react-start";
+import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { db } from "../db";
 
 export const auth = betterAuth({
@@ -19,5 +19,5 @@ export const auth = betterAuth({
       clientSecret: import.meta.env.VITE_GOOGLE_CLIENT_SECRET ?? "",
     },
   },
-  plugins: [admin(), reactStartCookies()],
+  plugins: [admin(), tanstackStartCookies()],
 });
