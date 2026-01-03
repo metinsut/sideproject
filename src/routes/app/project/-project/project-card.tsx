@@ -31,7 +31,7 @@ export function ProjectCard(props: Props) {
 
   const runtimeLocale = getLocale();
 
-  console.log({ runtimeLocale, files: m.completed_tasks() });
+  console.log("project-card", { runtimeLocale, files: m.completed_tasks() });
 
   return (
     <Card
