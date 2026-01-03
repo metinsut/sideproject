@@ -3,6 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import type { ProjectType } from "@/lib/db/schema";
 import { useChangeProject } from "@/lib/queries/projects";
 import { cn } from "@/lib/utils";
+import * as m from "@/paraglide/messages";
+import { getLocale } from "@/paraglide/runtime";
 
 type Props = {
   project: ProjectType;
@@ -27,6 +29,10 @@ export function ProjectCard(props: Props) {
 
   const isLoading = updateProjectMutation.isPending;
 
+  const runtimeLocale = getLocale();
+
+  console.log({ runtimeLocale, files: m.completed_tasks() });
+
   return (
     <Card
       key={project.id}
@@ -46,9 +52,9 @@ export function ProjectCard(props: Props) {
         <CardDescription>{project.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Waiting Tasks: 0</p>
-        <p>In Progress Tasks: 0</p>
-        <p>Completed Tasks: 0</p>
+        <p>{m.waiting_tasks()}: 0</p>
+        <p>{m.in_progress_tasks()}: 0</p>
+        <p>{m.completed_tasks()}: 0</p>
       </CardContent>
     </Card>
   );
