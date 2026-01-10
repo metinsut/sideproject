@@ -1,0 +1,8 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "name": "Project Name",
+  "description": "Project Description",
+  "waiting_tasks": "Waiting Tasks",
+  "in_progress_tasks": "In Progress Tasks",
+  "completed_tasks": "Completed Tasks"
+}

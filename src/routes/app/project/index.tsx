@@ -8,7 +8,6 @@ export const Route = createFileRoute("/app/project/")({
   loader: async ({ context: { queryClient } }) => {
     const projects = await queryClient.ensureQueryData(useGetProjects());
     const projectId = await getProjectIdFn();
-
     return { projects, projectId, crumb: "Projects" };
   },
   head: () => ({

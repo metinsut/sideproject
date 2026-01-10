@@ -3,11 +3,11 @@
 import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-// import { Toaster } from "@/components/ui/sonner";
 import { getUser } from "@/lib/functions/auth/getUser";
+import { getThemeServerFn } from "@/lib/functions/theme/theme-server";
+import type { ThemeTypes } from "@/lib/functions/theme/types";
 import { Links } from "@/lib/root/link";
-import { getThemeServerFn } from "@/lib/theme/theme-server";
-import type { ThemeTypes } from "@/lib/theme/types";
+import { getLocale } from "@/paraglide/runtime";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -62,14 +62,14 @@ type RootDocumentProps = {
 
 function RootDocument(props: Readonly<RootDocumentProps>) {
   const { children, theme } = props;
+  const locale = getLocale();
   return (
-    <html lang="en" className={theme} suppressHydrationWarning>
+    <html lang={locale} className={theme} suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body>
         {children}
-        {/* <Toaster /> */}
         <Scripts />
       </body>
     </html>

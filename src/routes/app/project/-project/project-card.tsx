@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import type { ProjectType } from "@/lib/db/schema";
 import { useChangeProject } from "@/lib/queries/projects";
 import { cn } from "@/lib/utils";
+import { m } from "@/paraglide/messages";
 
 type Props = {
   project: ProjectType;
@@ -46,9 +47,9 @@ export function ProjectCard(props: Props) {
         <CardDescription>{project.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Waiting Tasks: 0</p>
-        <p>In Progress Tasks: 0</p>
-        <p>Completed Tasks: 0</p>
+        <p>{m.waiting_tasks()}: 0</p>
+        <p>{m.in_progress_tasks()}: 0</p>
+        <p>{m.completed_tasks()}: 0</p>
       </CardContent>
     </Card>
   );

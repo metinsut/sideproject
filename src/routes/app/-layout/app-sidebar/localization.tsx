@@ -6,21 +6,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import type { LocaleType } from "@/lib/functions/locale/types";
+import { m } from "@/paraglide/messages";
+import { getLocale, setLocale } from "@/paraglide/runtime";
 
 export function Localization() {
-  const handleChangeLanguage = (language: string) => {
-    console.log(language);
+  const currentLocale = getLocale();
+
+  const handleChangeLanguage = (language: LocaleType) => {
+    setLocale(language);
   };
 
   return (
     <ClientOnly fallback={<div>Loading...</div>}>
-      <Select value="en" onValueChange={handleChangeLanguage}>
+      <Select value={currentLocale} onValueChange={handleChangeLanguage}>
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="Language" />
+          <SelectValue placeholder={m.language()} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="en">English</SelectItem>
-          <SelectItem value="tr">Turkish</SelectItem>
+          <SelectItem value="en">{m.english()}</SelectItem>
+          <SelectItem value="tr">{m.turkish()}</SelectItem>
         </SelectContent>
       </Select>
     </ClientOnly>

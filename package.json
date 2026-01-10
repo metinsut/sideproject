@@ -19,6 +19,7 @@
     "auth:generate": "bunx @better-auth/cli@latest generate --config ./src/lib/auth/index.ts --y --output ./src/lib/db/schema/auth.schema.ts && bun lint:unsafe"
   },
   "dependencies": {
+    "@inlang/paraglide-js": "latest",
     "@radix-ui/react-avatar": "latest",
     "@radix-ui/react-checkbox": "latest",
     "@radix-ui/react-dialog": "latest",

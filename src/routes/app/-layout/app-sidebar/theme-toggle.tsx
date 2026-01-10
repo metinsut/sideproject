@@ -8,8 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { ThemeTypes } from "@/lib/theme/types";
-import { ThemeEnum, themeCookieName } from "@/lib/theme/types";
+import type { ThemeTypes } from "@/lib/functions/theme/types";
+import { ThemeEnum, themeCookieName } from "@/lib/functions/theme/types";
 
 const themeConfig: Record<ThemeTypes, { icon: string; label: string }> = {
   light: { icon: "☀️", label: "Light" },
