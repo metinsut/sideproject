@@ -9,6 +9,7 @@ import { LOCALE_COOKIE_NAME } from "./src/lib/functions/locale/get-locale";
 export default defineConfig({
   server: {
     port: 3000,
+    open: true,
   },
   plugins: [
     paraglideVitePlugin({

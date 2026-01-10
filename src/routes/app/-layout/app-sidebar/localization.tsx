@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import type { LocaleType } from "@/lib/functions/locale/types";
-import * as m from "@/paraglide/messages";
+import { m } from "@/paraglide/messages";
 import { getLocale, setLocale } from "@/paraglide/runtime";
 
 export function Localization() {

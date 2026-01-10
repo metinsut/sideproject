@@ -1,11 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "greeting": "Merhaba {name}!",
-  "language": "Dil",
-  "english": "İngilizce",
-  "turkish": "Türkçe",
-  "project_name": "Proje Adı",
-  "project_description": "Proje Açıklaması",
+  "name": "Proje Adı",
+  "description": "Proje Açıklaması",
   "waiting_tasks": "Bekleyen Görevler",
   "in_progress_tasks": "Devam Eden Görevler",
   "completed_tasks": "Tamamlanan Görevler"

@@ -16,7 +16,7 @@ export async function defineConfig(env) {
     languages: locales,
     plugins: [
       pluginJson({
-        pathPattern: "./messages/{language}.json",
+        pathPattern: ["./languages/root/{locale}.json", "./languages/project/{locale}.json"],
       }),
       paraglide({
         project: "./project.inlang",
