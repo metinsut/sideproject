@@ -5,7 +5,6 @@ import viteReact from "@vitejs/plugin-react";
 import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
-import { LOCALE_COOKIE_NAME } from "./src/lib/functions/locale/get-locale";
 
 export default defineConfig({
   server: {
@@ -28,7 +27,7 @@ export default defineConfig({
       project: "./project.inlang",
       outdir: "./src/paraglide",
       strategy: ["cookie", "baseLocale"],
-      cookieName: LOCALE_COOKIE_NAME,
+      cookieName: "paraglide-locale",
     }),
   ],
 });

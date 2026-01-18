@@ -1,21 +1,40 @@
-# Bun'ı içeren base image
-FROM oven/bun:latest
+# Build stage
+FROM oven/bun:1 AS builder
 
 WORKDIR /app
 
-# Bun ile bağımlılıkları yükle
-COPY bun.lock bunfig.toml ./
-RUN bun install
+# Copy package files
+COPY package.json bun.lock ./
 
-# Kodları kopyala
+# Install dependencies
+RUN bun install --frozen-lockfile
+
+# Copy source code
 COPY . .
 
-# TanStack Start build yap
+# Build the application
 RUN bun run build
 
-# Port'u expose et
-EXPOSE 3000
-ENV PORT=3000
+# Production stage
+FROM oven/bun:1-slim AS runner
 
-# Bun ile TanStack Start server'ı başlat
-CMD ["bun", "run", "dist/server/index.mjs"]
+WORKDIR /app
+
+# Copy package files
+COPY package.json bun.lock ./
+
+# Install production dependencies only
+RUN bun install --frozen-lockfile --production
+
+# Copy built application from builder
+COPY --from=builder /app/.output ./.output
+COPY --from=builder /app/public ./public
+
+# Expose port
+EXPOSE 3000
+
+# Set environment to production
+ENV NODE_ENV=production
+
+# Start the application
+CMD ["bun", "run", ".output/server/index.mjs"]

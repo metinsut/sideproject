@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   app:
     build:
@@ -7,6 +9,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+      - PORT=3000
       - VITE_DATABASE_URL=${VITE_DATABASE_URL}
       - VITE_BASE_URL=${VITE_BASE_URL}
       - VITE_AUTH_SECRET=${VITE_AUTH_SECRET}

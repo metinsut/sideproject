@@ -1,8 +1,9 @@
 # Dependencies
 node_modules
 
-# Build outputs (dist is needed in Docker, so don't ignore it)
+# Build outputs (.output is needed in Docker for Nitro)
 .tanstack
+dist
 
 # Development files
 *.log
