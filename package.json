@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "bun --bun vite dev --host",
     "build": "bun --bun vite build",
-    "preview": "vite preview",
+    "preview": "bun --bun vite preview",
     "clear": "rm -rf node_modules && rm -rf dist && rm -rf bun.lock && rm -rf .tanstack && rm -rf .output",
     "typecheck": "tsc --noEmit",
     "lint": "bunx @biomejs/biome check .",
