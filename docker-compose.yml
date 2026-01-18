@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - VITE_DATABASE_URL=${VITE_DATABASE_URL}
+      - VITE_BASE_URL=${VITE_BASE_URL}
+      - VITE_AUTH_SECRET=${VITE_AUTH_SECRET}
+      - VITE_GOOGLE_CLIENT_ID=${VITE_GOOGLE_CLIENT_ID}
+      - VITE_GOOGLE_CLIENT_SECRET=${VITE_GOOGLE_CLIENT_SECRET}
+    restart: unless-stopped

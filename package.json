@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite dev --host",
     "build": "vite build",
+    "start": "bun .output/server/index.mjs",
     "clear": "rm -rf node_modules && rm -rf dist && rm -rf bun.lock && rm -rf .tanstack",
     "typecheck": "tsc --noEmit",
     "lint": "bunx @biomejs/biome check .",
@@ -66,6 +67,7 @@
     "@types/react-dom": "latest",
     "drizzle-kit": "latest",
     "typescript": "latest",
-    "vite-tsconfig-paths": "latest"
+    "vite-tsconfig-paths": "latest",
+    "nitro": "latest"
   }
 }
