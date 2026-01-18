@@ -15,7 +15,7 @@ export default defineConfig({
   plugins: [
     // TanStack Start must come first
     tanstackStart(),
-    // Nitro with Bun preset comes next
+    // Nitro with Bun preset
     nitro({ preset: "bun" }),
     // Path aliases
     tsConfigPaths(),

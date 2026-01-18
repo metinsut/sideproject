@@ -21,6 +21,7 @@ import { Route as authLoginRouteImport } from './routes/(auth)/login'
 import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
 import { Route as AppProjectIndexRouteImport } from './routes/app/project/index'
 import { Route as AppProjectListIndexRouteImport } from './routes/app/project-list/index'
+import { Route as AppAccountIndexRouteImport } from './routes/app/account/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as AppProjectProjectIdIndexRouteImport } from './routes/app/project/$projectId/index'
 import { Route as AppProjectProjectIdTasksIndexRouteImport } from './routes/app/project/$projectId/tasks/index'
@@ -86,6 +87,11 @@ const AppProjectListIndexRoute = AppProjectListIndexRouteImport.update({
   path: '/project-list/',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppAccountIndexRoute = AppAccountIndexRouteImport.update({
+  id: '/account/',
+  path: '/account/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -132,13 +138,14 @@ export interface FileRoutesByFullPath {
   '/': typeof landingIndexRoute
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/app/project-list': typeof AppProjectListIndexRoute
-  '/app/project': typeof AppProjectIndexRoute
-  '/app/project/$projectId': typeof AppProjectProjectIdIndexRoute
+  '/app/account/': typeof AppAccountIndexRoute
+  '/app/project-list/': typeof AppProjectListIndexRoute
+  '/app/project/': typeof AppProjectIndexRoute
+  '/app/project/$projectId/': typeof AppProjectProjectIdIndexRoute
   '/app/project/$projectId/tasks/$taskId': typeof AppProjectProjectIdTasksTaskIdRoute
   '/app/project/$projectId/tasks/new': typeof AppProjectProjectIdTasksNewRoute
-  '/app/project/$projectId/board': typeof AppProjectProjectIdBoardIndexRoute
-  '/app/project/$projectId/tasks': typeof AppProjectProjectIdTasksIndexRoute
+  '/app/project/$projectId/board/': typeof AppProjectProjectIdBoardIndexRoute
+  '/app/project/$projectId/tasks/': typeof AppProjectProjectIdTasksIndexRoute
 }
 export interface FileRoutesByTo {
   '/forgot-password': typeof authForgotPasswordRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByTo {
   '/': typeof landingIndexRoute
   '/app': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/app/account': typeof AppAccountIndexRoute
   '/app/project-list': typeof AppProjectListIndexRoute
   '/app/project': typeof AppProjectIndexRoute
   '/app/project/$projectId': typeof AppProjectProjectIdIndexRoute
@@ -170,6 +178,7 @@ export interface FileRoutesById {
   '/(landing)/': typeof landingIndexRoute
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/app/account/': typeof AppAccountIndexRoute
   '/app/project-list/': typeof AppProjectListIndexRoute
   '/app/project/': typeof AppProjectIndexRoute
   '/app/project/$projectId/': typeof AppProjectProjectIdIndexRoute
@@ -190,13 +199,14 @@ export interface FileRouteTypes {
     | '/'
     | '/app/'
     | '/api/auth/$'
-    | '/app/project-list'
-    | '/app/project'
-    | '/app/project/$projectId'
+    | '/app/account/'
+    | '/app/project-list/'
+    | '/app/project/'
+    | '/app/project/$projectId/'
     | '/app/project/$projectId/tasks/$taskId'
     | '/app/project/$projectId/tasks/new'
-    | '/app/project/$projectId/board'
-    | '/app/project/$projectId/tasks'
+    | '/app/project/$projectId/board/'
+    | '/app/project/$projectId/tasks/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/forgot-password'
@@ -207,6 +217,7 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/api/auth/$'
+    | '/app/account'
     | '/app/project-list'
     | '/app/project'
     | '/app/project/$projectId'
@@ -227,6 +238,7 @@ export interface FileRouteTypes {
     | '/(landing)/'
     | '/app/'
     | '/api/auth/$'
+    | '/app/account/'
     | '/app/project-list/'
     | '/app/project/'
     | '/app/project/$projectId/'
@@ -318,15 +330,22 @@ declare module '@tanstack/react-router' {
     '/app/project/': {
       id: '/app/project/'
       path: '/project'
-      fullPath: '/app/project'
+      fullPath: '/app/project/'
       preLoaderRoute: typeof AppProjectIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
     '/app/project-list/': {
       id: '/app/project-list/'
       path: '/project-list'
-      fullPath: '/app/project-list'
+      fullPath: '/app/project-list/'
       preLoaderRoute: typeof AppProjectListIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/account/': {
+      id: '/app/account/'
+      path: '/account'
+      fullPath: '/app/account/'
+      preLoaderRoute: typeof AppAccountIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
     '/api/auth/$': {
@@ -339,21 +358,21 @@ declare module '@tanstack/react-router' {
     '/app/project/$projectId/': {
       id: '/app/project/$projectId/'
       path: '/project/$projectId'
-      fullPath: '/app/project/$projectId'
+      fullPath: '/app/project/$projectId/'
       preLoaderRoute: typeof AppProjectProjectIdIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
     '/app/project/$projectId/tasks/': {
       id: '/app/project/$projectId/tasks/'
       path: '/project/$projectId/tasks'
-      fullPath: '/app/project/$projectId/tasks'
+      fullPath: '/app/project/$projectId/tasks/'
       preLoaderRoute: typeof AppProjectProjectIdTasksIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
     '/app/project/$projectId/board/': {
       id: '/app/project/$projectId/board/'
       path: '/project/$projectId/board'
-      fullPath: '/app/project/$projectId/board'
+      fullPath: '/app/project/$projectId/board/'
       preLoaderRoute: typeof AppProjectProjectIdBoardIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
@@ -408,6 +427,7 @@ const landingRouteRouteWithChildren = landingRouteRoute._addFileChildren(
 
 interface AppRouteRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
+  AppAccountIndexRoute: typeof AppAccountIndexRoute
   AppProjectListIndexRoute: typeof AppProjectListIndexRoute
   AppProjectIndexRoute: typeof AppProjectIndexRoute
   AppProjectProjectIdIndexRoute: typeof AppProjectProjectIdIndexRoute
@@ -419,6 +439,7 @@ interface AppRouteRouteChildren {
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppIndexRoute: AppIndexRoute,
+  AppAccountIndexRoute: AppAccountIndexRoute,
   AppProjectListIndexRoute: AppProjectListIndexRoute,
   AppProjectIndexRoute: AppProjectIndexRoute,
   AppProjectProjectIdIndexRoute: AppProjectProjectIdIndexRoute,
@@ -443,11 +464,10 @@ export const routeTree = rootRouteImport
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
+import type { createStart } from '@tanstack/react-start'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }
