@@ -45,6 +45,7 @@ function createAuth() {
       },
     },
     plugins: [admin(), tanstackStartCookies()],
+    trustedOrigins: [baseURL],
   });
 }
 
