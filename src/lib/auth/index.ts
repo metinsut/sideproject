@@ -45,7 +45,11 @@ function createAuth() {
       },
     },
     plugins: [admin(), tanstackStartCookies()],
-    trustedOrigins: [baseURL],
+    trustedOrigins: [
+      baseURL,
+      "http://localhost:8080",
+      "https://sideproject-i2nf4.ondigitalocean.app",
+    ],
   });
 }
 
