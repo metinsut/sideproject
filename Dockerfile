@@ -31,8 +31,7 @@ COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/public ./public
 
 # Expose port (Cloud Run uses PORT env variable)
-ENV PORT=8080
-EXPOSE 8080
+EXPOSE 3000
 
 # Set environment to production
 ENV NODE_ENV=production
