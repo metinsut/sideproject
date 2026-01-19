@@ -4,7 +4,9 @@ import postgres from "postgres";
 import * as schema from "./schema";
 
 function createDb() {
-  const url = import.meta.env.VITE_DATABASE_URL || Bun.env.VITE_DATABASE_URL;
+  // Use runtime environment variables (Bun.env or process.env)
+  // import.meta.env is build-time only and won't work in Docker runtime
+  const url = Bun.env.VITE_DATABASE_URL || import.meta.env.VITE_DATABASE_URL;
 
   if (!url) {
     throw new Error("VITE_DATABASE_URL is missing at runtime");

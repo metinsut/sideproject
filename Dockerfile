@@ -30,7 +30,7 @@ RUN bun install --frozen-lockfile --production
 COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/public ./public
 
-# Expose port (Cloud Run uses PORT env variable)
+# Expose port
 EXPOSE 3000
 
 # Set environment to production

@@ -5,11 +5,13 @@ import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { db } from "../db";
 
 function createAuth() {
-  const baseURL = import.meta.env.VITE_BASE_URL || Bun.env.VITE_BASE_URL;
-  const secret = import.meta.env.VITE_AUTH_SECRET || Bun.env.VITE_AUTH_SECRET;
-  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || Bun.env.VITE_GOOGLE_CLIENT_ID;
+  // Use runtime environment variables (Bun.env or process.env)
+  // import.meta.env is build-time only and won't work in Docker runtime
+  const baseURL = Bun.env.VITE_BASE_URL || import.meta.env.VITE_BASE_URL;
+  const secret = Bun.env.VITE_AUTH_SECRET || import.meta.env.VITE_AUTH_SECRET;
+  const googleClientId = Bun.env.VITE_GOOGLE_CLIENT_ID || import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const googleClientSecret =
-    import.meta.env.VITE_GOOGLE_CLIENT_SECRET || Bun.env.VITE_GOOGLE_CLIENT_SECRET;
+    Bun.env.VITE_GOOGLE_CLIENT_SECRET || import.meta.env.VITE_GOOGLE_CLIENT_SECRET;
 
   if (!baseURL) {
     throw new Error("VITE_BASE_URL is missing at runtime");

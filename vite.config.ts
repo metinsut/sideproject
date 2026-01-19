@@ -15,9 +15,7 @@ export default defineConfig({
     // TanStack Start must come first
     tanstackStart(),
     // Nitro with Bun preset
-    nitro({
-      preset: "bun",
-    }),
+    nitro({ preset: "bun" }),
     // Path aliases
     tsConfigPaths(),
     // React plugin
