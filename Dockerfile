@@ -30,11 +30,12 @@ RUN bun install --frozen-lockfile --production
 COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/public ./public
 
-# Expose port
-EXPOSE 3000
+# Expose port (Cloud Run uses PORT env variable)
+ENV PORT=8080
+EXPOSE 8080
 
 # Set environment to production
 ENV NODE_ENV=production
 
-# Start the application
+# Start the application (Cloud Run expects server to listen on $PORT)
 CMD ["bun", "run", ".output/server/index.mjs"]

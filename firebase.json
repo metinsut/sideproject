@@ -2,13 +2,6 @@
   "apphosting": {
     "backendId": "sideproject-test",
     "rootDir": "/",
-    "ignore": ["node_modules", ".git", "firebase-debug.log", "firebase-debug.*.log", "functions"],
-    "functions": {
-      "predeploy": [
-        "bun --bun run lint",
-        "bun --bun run build",
-        "bun --bun run .output/server/index.mjs"
-      ]
-    }
+    "ignore": ["node_modules", ".git", "firebase-debug.log", "firebase-debug.*.log", "functions"]
   }
 }

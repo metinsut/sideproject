@@ -8,16 +8,37 @@ runConfig:
   # memoryMiB: 512
 
 # Environment variables and secrets.
-# env:
-  # Configure environment variables.
-  # See https://firebase.google.com/docs/app-hosting/configure#user-defined-environment
-  # - variable: MESSAGE
-  #   value: Hello world!
-  #   availability:
-  #     - BUILD
-  #     - RUNTIME
+env:
+  # Database URL (stored in Secret Manager)
+  - variable: VITE_DATABASE_URL
+    secret: DATABASE_URL
+    availability:
+      - BUILD
+      - RUNTIME
 
-  # Grant access to secrets in Cloud Secret Manager.
-  # See https://firebase.google.com/docs/app-hosting/configure#secret-parameters
-  # - variable: MY_SECRET
-  #   secret: mySecretRef
+  # Base URL for the application
+  - variable: VITE_BASE_URL
+    value: https://sideproject-test.web.app
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # Auth secret (stored in Secret Manager)
+  - variable: VITE_AUTH_SECRET
+    secret: AUTH_SECRET
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # Google OAuth credentials (stored in Secret Manager)
+  - variable: VITE_GOOGLE_CLIENT_ID
+    secret: GOOGLE_CLIENT_ID
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: VITE_GOOGLE_CLIENT_SECRET
+    secret: GOOGLE_CLIENT_SECRET
+    availability:
+      - BUILD
+      - RUNTIME

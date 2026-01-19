@@ -14,8 +14,10 @@ export default defineConfig({
   plugins: [
     // TanStack Start must come first
     tanstackStart(),
-    // Nitro with Bun preset
-    nitro({ preset: "bun" }),
+    // Nitro with Cloud Run preset for Firebase App Hosting
+    nitro({
+      preset: "firebase-app-hosting",
+    }),
     // Path aliases
     tsConfigPaths(),
     // React plugin
