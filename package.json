@@ -17,7 +17,8 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "auth:secret": "bunx @better-auth/cli secret",
-    "auth:generate": "bunx @better-auth/cli@latest generate --config ./src/lib/auth/index.ts --y --output ./src/lib/db/schema/auth.schema.ts && bun lint:unsafe"
+    "auth:generate": "bunx @better-auth/cli@latest generate --config ./src/lib/auth/index.ts --y --output ./src/lib/db/schema/auth.schema.ts && bun lint:unsafe",
+    "docker": "docker-compose up --build"
   },
   "dependencies": {
     "@inlang/paraglide-js": "latest",

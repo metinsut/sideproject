@@ -1,40 +1,44 @@
-# Build stage
+#################################
+# 1) BUILD STAGE
+#################################
 FROM oven/bun:1 AS builder
 
 WORKDIR /app
 
-# Copy package files
-COPY package.json bun.lock ./
+# Build stage - no build-time env vars needed
+# Runtime environment variables are handled in runner stage via docker-compose
 
-# Install dependencies
+# source’u kopyala + bağımlılık yükle
+COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 
-# Copy source code
 COPY . .
-
-# Build the application
+# build
 RUN bun run build
 
-# Production stage
+#################################
+# 2) RUNNER STAGE
+#################################
 FROM oven/bun:1-slim AS runner
 
 WORKDIR /app
 
-# Copy package files
+# Production dependencies
 COPY package.json bun.lock ./
-
-# Install production dependencies only
 RUN bun install --frozen-lockfile --production
 
-# Copy built application from builder
+# Build çıktısını al
 COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/public ./public
 
-# Expose port
+# PORT ayarı
+ENV PORT=3000
 EXPOSE 3000
 
-# Set environment to production
+# Production environment
 ENV NODE_ENV=production
 
-# Start the application (Cloud Run expects server to listen on $PORT)
+# Runtime environment variables will be provided by docker-compose.yml
+# Do not set them here as they need to come from docker-compose environment section
+
 CMD ["bun", "run", ".output/server/index.mjs"]
