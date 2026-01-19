@@ -32,8 +32,8 @@ COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/public ./public
 
 # PORT ayarı
-ENV PORT=3000
-EXPOSE 3000
+ENV PORT=8080
+EXPOSE 8080
 
 # Production environment
 ENV NODE_ENV=production
