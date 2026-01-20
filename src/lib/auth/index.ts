@@ -13,6 +13,10 @@ function createAuth() {
   const googleClientSecret =
     Bun.env.VITE_GOOGLE_CLIENT_SECRET || import.meta.env.VITE_GOOGLE_CLIENT_SECRET;
 
+  console.log(Bun.env.VITE_BASE_URL);
+  console.log(import.meta.env.VITE_BASE_URL);
+  console.log(process.env.VITE_BASE_URL);
+  console.log(Bun.env.BASE_URL);
   console.log({ baseURL, secret, googleClientId, googleClientSecret });
 
   if (!baseURL) {
