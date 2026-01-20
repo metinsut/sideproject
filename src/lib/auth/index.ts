@@ -13,6 +13,8 @@ function createAuth() {
   const googleClientSecret =
     Bun.env.VITE_GOOGLE_CLIENT_SECRET || import.meta.env.VITE_GOOGLE_CLIENT_SECRET;
 
+  console.log({ baseURL, secret, googleClientId, googleClientSecret });
+
   if (!baseURL) {
     throw new Error("VITE_BASE_URL is missing at runtime");
   }
