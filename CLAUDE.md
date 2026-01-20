@@ -99,7 +99,7 @@ Please check before install
 ## Environment Variables
 Required environment variables (all prefixed with `VITE_`):
 - `VITE_DATABASE_URL` - PostgreSQL connection string
-- `VITE_BASE_URL` - Application base URL
+- `VITE_AUTH_BASE_URL` - Application base URL
 - `VITE_AUTH_SECRET` - Better Auth secret
 - `VITE_GOOGLE_CLIENT_ID` - Google OAuth client ID
 - `VITE_GOOGLE_CLIENT_SECRET` - Google OAuth client secret
