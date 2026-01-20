@@ -13,6 +13,8 @@ function createAuth() {
   const googleClientSecret =
     Bun.env.VITE_GOOGLE_CLIENT_SECRET || import.meta.env.VITE_GOOGLE_CLIENT_SECRET;
 
+  console.log({ baseURL, secret, googleClientId, googleClientSecret });
+
   if (!baseURL) {
     throw new Error("VITE_AUTH_BASE_URL is missing at runtime");
   }
@@ -45,11 +47,7 @@ function createAuth() {
       },
     },
     plugins: [admin(), tanstackStartCookies()],
-    trustedOrigins: [
-      baseURL,
-      "http://localhost:8080",
-      "https://sideproject-i2nf4.ondigitalocean.app",
-    ],
+    trustedOrigins: [baseURL],
   });
 }
 
