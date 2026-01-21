@@ -17,6 +17,10 @@ function createAuth() {
     throw new Error("VITE_BETTER_AUTH_URL or BETTER_AUTH_URL is missing at runtime");
   }
 
+  if (!secret) {
+    throw new Error("VITE_BETTER_AUTH_SECRET or BETTER_AUTH_SECRET is missing at runtime");
+  }
+
   if (!googleClientId) {
     throw new Error("VITE_GOOGLE_CLIENT_ID is missing at runtime");
   }
