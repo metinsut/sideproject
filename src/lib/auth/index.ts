@@ -8,17 +8,17 @@ function createAuth() {
   // Use runtime environment variables (Bun.env or process.env)
   // import.meta.env is build-time only and won't work in Docker runtime
   const baseURL = Bun.env.VITE_BETTER_AUTH_URL || import.meta.env.VITE_BETTER_AUTH_URL;
-  const secret = Bun.env.BETTER_AUTH_SECRET || import.meta.env.BETTER_AUTH_SECRET;
+  const secret = Bun.env.VITE_BETTER_AUTH_SECRET || import.meta.env.VITE_BETTER_AUTH_SECRET;
   const googleClientId = Bun.env.VITE_GOOGLE_CLIENT_ID || import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const googleClientSecret =
     Bun.env.VITE_GOOGLE_CLIENT_SECRET || import.meta.env.VITE_GOOGLE_CLIENT_SECRET;
 
   if (!baseURL) {
-    throw new Error("VITE_BETTER_AUTH_URL or BETTER_AUTH_URL is missing at runtime");
+    throw new Error("VITE_BETTER_AUTH_URL is missing at runtime");
   }
 
   if (!secret) {
-    throw new Error("VITE_BETTER_AUTH_SECRET or BETTER_AUTH_SECRET is missing at runtime");
+    throw new Error("VITE_BETTER_AUTH_SECRET is missing at runtime");
   }
 
   if (!googleClientId) {
